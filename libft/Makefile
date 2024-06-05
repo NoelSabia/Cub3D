@@ -40,9 +40,9 @@ garbage_collector2.c
 
 OBJ = ${SOURCES:.c=.o}
 
-INCLUDES = libft.h
+INCLUDES = .
 
-CFLAGS = -Wall -Wextra -Werror -I ./
+CFLAGS = -Wall -Wextra -Werror
 
 .c.o:
 	cc ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCLUDES}
