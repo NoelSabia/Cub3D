@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/05 20:31:18 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/05 21:01:15 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,26 @@ char	*read_into_input(char *filename)
 	return (buffer);
 }
 
+char	*replace_tab_helper(const char *str, char *result, int *j, int *i)
+{
+	char	old_char;
+
+	old_char = '\t';
+	while (str[++(*i)])
+	{
+		if (str[*i] == old_char)
+		{
+			result[++(*j)] = ' ';
+			result[++(*j)] = ' ';
+			result[++(*j)] = ' ';
+			result[++(*j)] = ' ';
+		}
+		else
+			result[++(*j)] = str[*i];
+	}
+	return (result);
+}
+
 char	*replace_tab(const char *str, char old_char, const char *new_str)
 {
 	int		i;
@@ -48,16 +68,7 @@ char	*replace_tab(const char *str, char old_char, const char *new_str)
 			count++;
 	result = ft_calloc(1, (count * new_str_len) + (ft_strlen(str) + 1));
 	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == old_char)
-		{
-			ft_strlcpy(&result[j], new_str, ft_strlen(new_str));
-			j += new_str_len;
-		}
-		else
-			result[++j] = str[i];
-	}
+	result = replace_tab_helper(str, result, &j, &i);
 	result[++j] = '\0';
 	return (result);
 }
