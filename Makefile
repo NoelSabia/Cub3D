@@ -2,10 +2,11 @@ NAME := Cub3D
 
 CFLAGS = -Wextra -Wall -Werror
 
-HEADERS := -I ./include
+HEADERS := -I ./include -I ./libft
 
 SRCDIR := ./src/
-SRCS := $(SRCDIR)main.c
+SRCS := $(SRCDIR)main.c \
+        $(SRCDIR)parsing/parsing.c
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
@@ -16,22 +17,22 @@ CC := cc
 
 all: $(NAME)
 
-libft:
-	@make -C libft
+libft/libft.a:
+	@$(MAKE) -C libft
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
 
-$(NAME): $(OBJS) libft
-	$(CC) $(OBJS) -o $(NAME) $(HEADERS)
+$(NAME): $(OBJS) libft/libft.a
+	$(CC) $(OBJS) -o $(NAME) -Llibft -lft -lm
 
 clean:
-	@make -C libft clean
+	@$(MAKE) -C libft clean
 	@rm -rf $(OBJDIR)
 
 fclean: clean
-	@make -C libft fclean
+	@$(MAKE) -C libft fclean
 	@rm -rf $(NAME)
 
 re: fclean all

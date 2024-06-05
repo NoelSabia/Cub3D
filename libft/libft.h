@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:34:25 by nsabia            #+#    #+#             */
-/*   Updated: 2023/10/21 16:22:56 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:08:08 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,8 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void	*ft_malloc(size_t size);
+void	ft_free_all(void);
 
 #endif

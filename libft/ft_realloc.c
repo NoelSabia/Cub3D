@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/05 15:33:07 by nsabia           ###   ########.fr       */
+/*   Created: 2024/06/05 15:05:55 by nsabia            #+#    #+#             */
+/*   Updated: 2024/06/05 15:15:53 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-void	read_into_input(t_parsing *parse, char *filename)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	int	fd;
+	char	*newptr;
 
-	(void)parse;
-	fd = open(filename, O_RDONLY);
-}
-
-void	parsing(t_parsing *parse, char *filename)
-{
-	read_into_input(parse, filename);
+	if (!ptr)
+		return (ft_malloc(new_size));
+	newptr = ft_malloc(new_size);
+	if (!newptr)
+		return (ptr);
+	ft_memcpy(newptr, ptr, old_size);
+	return (newptr);
 }
