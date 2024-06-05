@@ -6,12 +6,11 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/05 21:01:15 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/05 21:05:51 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <string.h>
 
 char	*read_into_input(char *filename)
 {
@@ -78,9 +77,8 @@ void	parsing(t_parsing *parse, char *filename)
 	char	*output;
 	char	*clean_output;
 
-	(void)parse;
 	output = read_into_input(filename);
 	clean_output = replace_tab(output, '	', "    ");
-	// fill_parse_struct(parse, clean_output);
+	fill_parse_struct(parse, clean_output);
 	printf("%s\n", clean_output);
 }
