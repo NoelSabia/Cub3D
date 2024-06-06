@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 00:47:44 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/05 19:36:49 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/06 08:52:10 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
+
+void	clean_exit(char *str)
+{
+	printf("Error\n");
+	printf("%s\n", str);
+	ft_free_all();
+	exit(1);
+}
 
 int	main(int argc, char *argv[])
 {

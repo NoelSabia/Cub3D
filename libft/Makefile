@@ -34,6 +34,7 @@ ft_strtrim.c \
 ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
+ft_strncpy.c \
 ft_realloc.c \
 garbage_collector.c \
 garbage_collector2.c

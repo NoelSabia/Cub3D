@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/05 21:05:36 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/06 11:12:49 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_parsing
 }	t_parsing;
 
 void	parsing(t_parsing *parse, char *filename);
+void	fill_parse_struct(t_parsing *parse);
 
 /*Player_movement functions and structs*/
 
