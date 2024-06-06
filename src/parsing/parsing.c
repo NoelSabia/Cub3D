@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/06 11:15:07 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:40:52 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,18 @@ void	put_in_2d_array(t_parsing *parse, char *clean_output)
 	int		i;
 	int		j;
 	int		k;
+	int		line_count;
 	char	*str;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	k = 0;
-	parse->input = ft_malloc(sizeof(parse->input));
+	line_count = 0;
+	while (clean_output[++i])
+		if (clean_output[i] == '\n')
+			line_count++;
+	parse->input = ft_malloc((line_count + 1) * sizeof(char *));
+	i = 0;
 	while (clean_output[i])
 	{
 		while (clean_output[i] && clean_output[i] != '\n')
@@ -90,8 +96,9 @@ void	put_in_2d_array(t_parsing *parse, char *clean_output)
 		str = ft_strncpy(clean_output, j, i);
 		i++;
 		j = i;
-		parse->input[k++] = str;
+		parse->input[k++] = ft_strdup(str);
 	}
+	parse->input[k] = NULL;
 }
 
 void	parsing(t_parsing *parse, char *filename)

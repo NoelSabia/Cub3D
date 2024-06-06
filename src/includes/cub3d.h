@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/06 11:12:49 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:27:09 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,8 @@ void	fill_parse_struct(t_parsing *parse);
 /*Raycasting functions and structs*/
 
 /*Walls funcitons and structs*/
+
+/*Main*/
+void	clean_exit(char *str);
 
 #endif
