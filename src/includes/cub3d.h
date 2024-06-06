@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/06 16:27:09 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/06 17:20:07 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 typedef struct s_parsing
 {
 	char	**input;
+	int		input_counter;
 	char	*north;
 	char	*south;
 	char	*west;
