@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:17:21 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/07 22:09:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:45:20 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,37 @@
 
 void    put_in_map(int *i, t_parsing *parse)
 {
-	(void)i;
-	(void)parse;
-}
+	int	len;
+	int	k;
 
-char    **fill_allowed_chars()
-{
-	char    **allowed_chars;
-
-	allowed_chars = ft_malloc(9 * sizeof(char *));
-	allowed_chars[0] = ft_strdup("0");
-	allowed_chars[1] = ft_strdup("1");
-	allowed_chars[2] = ft_strdup("N");
-	allowed_chars[3] = ft_strdup("S");
-	allowed_chars[4] = ft_strdup("W");
-	allowed_chars[5] = ft_strdup("E");
-	allowed_chars[6] = ft_strdup(" ");
-	allowed_chars[7] = ft_strdup("	");
-	allowed_chars[8] = NULL;
-	return (allowed_chars);
+	len = 0;
+	k = -1;
+	while (parse->input[(*i)++])
+		len++;
+	(*i) -= len;
+	len += (*i);
+	parse->map = ft_malloc(len * sizeof(char *));
+	(*i)--;
+	while (parse->input[++(*i)])
+		parse->map[++k] = ft_strdup(parse->input[(*i)]);
+	parse->map[k] = NULL;
 }
 
 bool    is_only_included(char *str)
 {
-    char    **allowed_chars;
     int     i;
-    int     k;
     size_t  is_inside;
 
-    allowed_chars = fill_allowed_chars();
     i = -1;
     is_inside = 0;
+	if (ft_strchr(str, '0') == NULL && ft_strchr(str, '1') == NULL)
+		return (false);
     while (str[++i])
     {
-        k = -1;
-        while (allowed_chars[++k] != NULL)
-        {
-            if (str[i] == allowed_chars[k][0])
-				is_inside++;
-        }
+		if (str[i] == '0' || str[i] == '1' || str[i] == 'N'
+				|| str[i] == 'W' || str[i] == 'E' || str[i] == 'S'
+				|| str[i] == 32 || str[i] == '\t' || str[i] == '\n')
+			is_inside++;
     }
 	if (is_inside == ft_strlen(str))
 		return (true);
@@ -66,16 +58,15 @@ void    search_for_map_start(t_parsing *parse)
 	int i;
 
 	i = 0;
-while (parse->input[i]) 
-{
+	while (parse->input[i]) 
+	{
 		if (is_only_included(parse->input[i]) == true)
 		{
-			printf("here: %s\n", parse->input[i]);
 			put_in_map(&i, parse);
 			return ;
 		}
 		i++;
-}
+	}
 }
 
 void    validate_map(t_parsing *parse)
