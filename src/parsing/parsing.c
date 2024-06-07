@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/06 16:40:52 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:30:34 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	put_in_2d_array(t_parsing *parse, char *clean_output)
 	while (clean_output[++i])
 		if (clean_output[i] == '\n')
 			line_count++;
-	parse->input = ft_malloc((line_count + 1) * sizeof(char *));
+	parse->input = ft_malloc((line_count + 3) * sizeof(char *));
 	i = 0;
 	while (clean_output[i])
 	{
@@ -110,4 +110,5 @@ void	parsing(t_parsing *parse, char *filename)
 	clean_output = replace_tab(output, '	', "    ");
 	put_in_2d_array(parse, clean_output);
 	fill_parse_struct(parse);
+	validate_map(parse);
 }

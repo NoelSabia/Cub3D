@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:03:06 by nsabia            #+#    #+#             */
-/*   Updated: 2023/10/20 13:43:58 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:15:33 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	i = 0;
 	if (str1[0] == 0 && str2[0] == 0)
 		return (0);
-	while (i < n && (str1[i] != 0 || str2[i] != 0))
+	while ((str1[i] || str2[i]) && i < n)
 	{
 		if (str1[i] == str2[i])
 			i++;

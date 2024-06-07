@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:05:20 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/06 17:27:45 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:35:30 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	fill_parse_struct(t_parsing *parse)
 	char	*line;
 
 	i = -1;
+	parse->input_counter = 0;
 	while (parse->input[++i] && parse->input_counter < 6)
 	{
 		m = 0;

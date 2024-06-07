@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/07 09:41:34 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/07 15:08:47 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_parsing
 
 void	parsing(t_parsing *parse, char *filename);
 void	fill_parse_struct(t_parsing *parse);
+void    validate_map(t_parsing *parse);
 
 /*Player_movement functions and structs*/
 
