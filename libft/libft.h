@@ -19,7 +19,6 @@
 # define GARBAGE_SUCCESS 0
 
 # include <stdlib.h>
-# include "../src/includes/cub3d.h"
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);

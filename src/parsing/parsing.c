@@ -110,5 +110,4 @@ void	parsing(t_parsing *parse, char *filename)
 	clean_output = replace_tab(output, '	', "    ");
 	put_in_2d_array(parse, clean_output);
 	fill_parse_struct(parse);
-	printf("%s\n", clean_output);
 }
