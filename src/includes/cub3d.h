@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/07 15:08:47 by noel             ###   ########.fr       */
+/*   Updated: 2024/06/08 11:55:18 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ typedef struct s_parsing
 	char	*west;
 	char	*east;
 	char	*floor;
+	int north_set;
+    int south_set;
+    int west_set;
+    int east_set;
+    int floor_set;
+    int ceiling_set;
 	char	*ceiling;
 	char	**map;
 }	t_parsing;
