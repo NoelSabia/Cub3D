@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/08 12:40:12 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/10 15:21:59 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ typedef struct s_parsing
 	char	*west;
 	char	*east;
 	char	*floor;
-	int north_set;
-    int south_set;
-    int west_set;
-    int east_set;
-    int floor_set;
-    int ceiling_set;
+	int		north_set;
+	int		south_set;
+	int		west_set;
+	int		east_set;
+	int		floor_set;
+	int		ceiling_set;
 	char	*ceiling;
 	char	**map;
 }	t_parsing;
 
 void	parsing(t_parsing *parse, char *filename);
 void	fill_parse_struct(t_parsing *parse);
-void    validate_map(t_parsing *parse);
-void    check_row_for_row(t_parsing *parse);
+void	validate_map(t_parsing *parse);
+void	flood_fill_organizer(t_parsing *parse);
 
 /*Player_movement functions and structs*/
 
