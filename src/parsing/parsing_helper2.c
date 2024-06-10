@@ -6,12 +6,11 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:17:21 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/10 10:29:05 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/10 14:57:52 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <stdbool.h>
 
 void	put_in_map(int *i, t_parsing *parse)
 {
@@ -25,10 +24,12 @@ void	put_in_map(int *i, t_parsing *parse)
 	(*i) -= len;
 	len += (*i);
 	parse->map = ft_malloc(len * sizeof(char *));
-	(*i)--;
+	(*i) -= 2;
 	while (parse->input[++(*i)])
 		parse->map[++k] = ft_strdup(parse->input[(*i)]);
-	parse->map[k] = NULL;
+	parse->map[++k] = NULL;
+	for (int i = 0; parse->map[i]; i++)
+        printf("here: %s\n", parse->map[i]);
 }
 
 bool	is_only_included(char *str)
@@ -71,5 +72,5 @@ void	search_for_map_start(t_parsing *parse)
 void	validate_map(t_parsing *parse)
 {
 	search_for_map_start(parse);
-	flood_fill(parse);
+	check_row_for_row(parse);
 }

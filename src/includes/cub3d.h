@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/08 11:55:18 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/08 12:40:12 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
+# include <stdbool.h>
 
 # include "../../libft/libft.h"
 # include "../../MLX42/include/MLX42/MLX42.h"
@@ -53,6 +54,7 @@ typedef struct s_parsing
 void	parsing(t_parsing *parse, char *filename);
 void	fill_parse_struct(t_parsing *parse);
 void    validate_map(t_parsing *parse);
+void    check_row_for_row(t_parsing *parse);
 
 /*Player_movement functions and structs*/
 
