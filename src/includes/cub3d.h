@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/10 15:21:59 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/10 20:13:56 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ typedef struct s_parsing
 	int		ceiling_set;
 	char	*ceiling;
 	char	**map;
+	int		x;
+	int		y;
+	int		rows;
+	int		cols;
 }	t_parsing;
 
 void	parsing(t_parsing *parse, char *filename);

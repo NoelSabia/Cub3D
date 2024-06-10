@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:27:24 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/10 18:35:57 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/10 21:02:05 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*fill_spaces(int len)
 	return (str);
 }
 
-char	*ft_combine_two_str(char *str1, char *str2)
+char	*combine_strs(char *str1, char *str2)
 {
 	int		i;
 	int		j;
@@ -52,7 +52,6 @@ char	*ft_combine_two_str(char *str1, char *str2)
 	return (result);
 }
 
-
 void	out_of_bounce_procection(t_parsing *parse)
 {
 	int	len;
@@ -70,24 +69,40 @@ void	out_of_bounce_procection(t_parsing *parse)
 			longest = len;
 	}
 	longest--;
+	parse->cols = i;
+	parse->rows = longest;
 	i = -1;
 	while (parse->map[++i])
 	{
 		m = 0;
 		while (parse->map[i][m])
 			m++;
-		parse->map[i]
-			= ft_combine_two_str(parse->map[i], fill_spaces(longest - m));
+		parse->map[i] = combine_strs(parse->map[i], fill_spaces(longest - m));
 	}
 }
 
-void	flood_fill(t_parsing *parse)
+void	flood_fill(t_parsing *parse, char **map, int rows, int cols)
 {
-
+	if (parse->x < 0 || parse->x >= parse->rows || parse->y < 0
+		|| parse->y >= parse->cols
+		|| parse->map[parse->x][parse->y] != '0')
+		return ;
+	flood_fill(parse, parse->map[parse->x + 1][parse->y],
+		parse->rows, parse->cols);
+	flood_fill(parse, parse->map[parse->x - 1][parse->y],
+		parse->rows, parse->cols);
+	flood_fill(parse, parse->map[parse->x][parse->y + 1],
+		parse->rows, parse->cols);
+	flood_fill(parse, parse->map[parse->x][parse->y - 1],
+		parse->rows, parse->cols);
 }
 
 void	flood_fill_organizer(t_parsing *parse)
 {
 	out_of_bounce_procection(parse);
-	flood_fill(parse);
+	parse->x = 0;
+	parse->y = 0;
+	for (int i = 0; parse->map[i]; i++)
+		printf("%s", parse->map[i]);
+	flood_fill(parse, parse->map, parse->rows, parse->cols);
 }
