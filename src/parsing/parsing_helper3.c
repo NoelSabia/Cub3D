@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:27:24 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/10 21:02:05 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/11 11:36:22 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	out_of_bounce_procection(t_parsing *parse)
 	}
 }
 
+//TODO: flood fill isnt working properly right now
 void	flood_fill(t_parsing *parse, char **map, int rows, int cols)
 {
 	if (parse->x < 0 || parse->x >= parse->rows || parse->y < 0
