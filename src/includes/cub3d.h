@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/07 09:41:34 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/10 20:13:56 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
+# include <stdbool.h>
 
 # include "../../libft/libft.h"
 # include "../../MLX42/include/MLX42/MLX42.h"
@@ -40,12 +41,24 @@ typedef struct s_parsing
 	char	*west;
 	char	*east;
 	char	*floor;
+	int		north_set;
+	int		south_set;
+	int		west_set;
+	int		east_set;
+	int		floor_set;
+	int		ceiling_set;
 	char	*ceiling;
 	char	**map;
+	int		x;
+	int		y;
+	int		rows;
+	int		cols;
 }	t_parsing;
 
 void	parsing(t_parsing *parse, char *filename);
 void	fill_parse_struct(t_parsing *parse);
+void	validate_map(t_parsing *parse);
+void	flood_fill_organizer(t_parsing *parse);
 
 /*Player_movement functions and structs*/
 

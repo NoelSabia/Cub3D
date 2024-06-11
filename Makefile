@@ -7,7 +7,9 @@ HEADERS := -I ./include -I ./libft
 SRCDIR := ./src/
 SRCS := $(SRCDIR)main.c \
         $(SRCDIR)parsing/parsing.c \
-		$(SRCDIR)parsing/parsing_helper.c
+		$(SRCDIR)parsing/parsing_helper.c \
+		$(SRCDIR)parsing/parsing_helper2.c \
+		$(SRCDIR)parsing/parsing_helper3.c	
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)

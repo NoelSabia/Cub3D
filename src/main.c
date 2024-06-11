@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 00:47:44 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/06 08:52:10 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/10 18:07:39 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char *argv[])
 {
 	t_parsing	*parse;
 
-	parse = ft_malloc(sizeof(parse));
+	parse = ft_malloc(sizeof(t_parsing));
 	if (argc < 2 || argc > 2)
 		printf("Usage: ./Cub3d <filename>.cub\n");
 	else
