@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/10 20:13:56 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/11 16:36:03 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,43 @@ void	validate_map(t_parsing *parse);
 void	flood_fill_organizer(t_parsing *parse);
 
 /*Player_movement functions and structs*/
+typedef struct s_player
+{
+	int		plyr_x;
+	int		plyr_y;
+	double	angle;
+	float	fov_radius;
+	int		rotation;
+	int		left_or_right;
+	int		up_or_down;
+}	t_player;
+
 
 /*Raycasting functions and structs*/
+typedef struct s_ray
+{
+	double	ray_angle;
+	double	distance_to_wall;
+	int		flag_for_wall;
+}	t_ray;
+
+/*with parse you have access to parse->map(2d) or
+parse->map_widht(rows) or parse->map_height*/
+typedef struct s_data
+{
+	t_parsing	*parse;
+	int		player_x;
+	int		player_y;
+}	t_data;
+
+typedef struct s_mlx
+{
+	mlx_image_t		*img;
+	mlx_t			*mlx_p;
+	t_ray			*ray;
+	t_data			*dt;
+	t_player		*ply;
+}	t_mlx;
 
 /*Walls funcitons and structs*/
 
