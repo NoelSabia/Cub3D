@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/12 17:09:25 by nsabia           ###   ########.fr       */
+/*   Created: 2024/06/12 17:10:10 by nsabia            #+#    #+#             */
+/*   Updated: 2024/06/12 17:11:22 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-
-
-void	raycasting(t_mlx *mlx)
+void	keyhook_organizer(void *mlx_copy)
 {
-	// find_first_rayangle(mlx, parse);
+	
 }
