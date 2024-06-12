@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/11 16:36:03 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/11 18:51:19 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <stdbool.h>
+# include <math.h>
 
 # include "../../libft/libft.h"
 # include "../../MLX42/include/MLX42/MLX42.h"
@@ -26,7 +27,7 @@
 /*Defines*/
 # define SCREEN_WIDTH 1900
 # define SCREEN_HEIGHT 1000
-# define TILE_SIZE 30
+# define TILE_SIZE 100
 # define FOV 60
 # define ROTATION_SPEED 0.045
 # define PLAYER_SPEED 4
@@ -53,6 +54,8 @@ typedef struct s_parsing
 	int		y;
 	int		rows;
 	int		cols;
+	int		player_x;
+	int		player_y;
 }	t_parsing;
 
 void	parsing(t_parsing *parse, char *filename);
@@ -72,7 +75,6 @@ typedef struct s_player
 	int		up_or_down;
 }	t_player;
 
-
 /*Raycasting functions and structs*/
 typedef struct s_ray
 {
@@ -81,23 +83,17 @@ typedef struct s_ray
 	int		flag_for_wall;
 }	t_ray;
 
-/*with parse you have access to parse->map(2d) or
-parse->map_widht(rows) or parse->map_height*/
-typedef struct s_data
-{
-	t_parsing	*parse;
-	int		player_x;
-	int		player_y;
-}	t_data;
-
 typedef struct s_mlx
 {
 	mlx_image_t		*img;
 	mlx_t			*mlx_p;
 	t_ray			*ray;
-	t_data			*dt;
+	t_parsing		*parse;
 	t_player		*ply;
 }	t_mlx;
+
+void	raycasting(t_mlx *mlx);
+void	init(t_mlx *mlx);
 
 /*Walls funcitons and structs*/
 

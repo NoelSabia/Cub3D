@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:17:21 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/10 16:25:37 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/11 19:14:31 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,31 @@ void	search_for_map_start(t_parsing *parse)
 	}
 }
 
+void	search_player_position(t_parsing *parse)
+{
+	int	i;
+	int	m;
+
+	i = -1;
+	while (parse->map[++i])
+	{
+		m = 0;
+		while (parse->map[i][m] == '\t' || parse->map[i][m] == ' '
+			|| parse->map[i][m] == '1' || parse->map[i][m] == '0')
+			m++;
+		if (parse->map[i][m] == 'N' || parse->map[i][m] == 'S'
+			|| parse->map[i][m] == 'W' || parse->map[i][m] == 'E')
+		{
+			parse->player_y = i;
+			parse->player_x = m;
+			return ;
+		}
+	}
+}
+
 void	validate_map(t_parsing *parse)
 {
 	search_for_map_start(parse);
+	search_player_position(parse);
 	flood_fill_organizer(parse);
 }
