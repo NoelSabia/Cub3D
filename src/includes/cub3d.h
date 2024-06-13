@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/12 17:11:13 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/13 12:00:59 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /*Defines*/
 # define SCREEN_WIDTH 1900
 # define SCREEN_HEIGHT 1000
-# define TILE_SIZE 100
+# define TILE_SIZE 50 
 # define FOV 60
 # define ROTATION_SPEED 0.045
 # define PLAYER_SPEED 4
@@ -80,7 +80,6 @@ void	keyhook_organizer(void *mlx_copy);
 /*Raycasting functions and structs*/
 typedef struct s_ray
 {
-	double	ray_angle;
 	double	distance_to_wall;
 	int		flag_for_wall;
 }	t_ray;
@@ -90,12 +89,11 @@ typedef struct s_mlx
 	mlx_image_t		*img;
 	mlx_t			*mlx_p;
 	t_ray			*ray;
-	t_parsing		*parse;
 	t_player		*ply;
 }	t_mlx;
 
 void	raycasting(t_mlx *mlx);
-void	init(t_mlx *mlx);
+void	init(t_mlx *mlx, t_parsing *parse);
 
 /*Walls funcitons and structs*/
 
