@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/10 20:13:56 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/16 13:09:34 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	parsing(t_parsing *parse, char *filename);
 void	fill_parse_struct(t_parsing *parse);
 void	validate_map(t_parsing *parse);
 void	flood_fill_organizer(t_parsing *parse);
+void	find_player(t_parsing *parse);
+char	**map_copy_it(t_parsing *parse);
 
 /*Player_movement functions and structs*/
 
