@@ -1,6 +1,6 @@
 NAME := Cub3D
 
-CFLAGS = -Wextra -Wall 
+CFLAGS = -Wextra -Wall
 
 HEADERS := -I ./include -I ./libft -I ./MLX/include
 
@@ -11,10 +11,15 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/parsing_helper.c \
 		$(SRCDIR)parsing/parsing_helper2.c \
 		$(SRCDIR)parsing/parsing_helper3.c \
-		$(SRCDIR)raycasting/raycasting.c
+		$(SRCDIR)raycasting/raycasting.c  \
+		$(SRCDIR)parsing/parsing_helper4.c
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
+
+MLX_LIB		= ./MLX42/build/libmlx42.a
+MLX_PATH	= ./MLX42
+MLX			= -ldl -lglfw -pthread -lm
 
 CC := cc
 
@@ -30,15 +35,18 @@ all: $(NAME)
 libft/libft.a:
 	@$(MAKE) -C libft
 
-$(MLX):
-	cd $(MLX_DIR)/build && cmake .. && make -j4
-
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: $(SRCDIR)%.c $(MLX_LIB)
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
+	$(CC) $(CFLAGS) -I$(MLX_PATH)/include -c $< -o $@ $(HEADERS)
 
-$(NAME): $(OBJS) libft/libft.a $(MLX)
-	$(CC) $(OBJS) -o $(NAME) -Llibft -lft $(MLX_FLAGS)
+$(NAME): $(OBJS) libft/libft.a
+	$(CC) $(OBJS) $(MLX_LIB) $(MLX) -o $(NAME) -Llibft -lft -lm
+
+$(MLX_LIB):
+	git clone https://github.com/codam-coding-college/MLX42.git $(MLX_PATH)
+	mkdir -p $(MLX_PATH)/build
+	cd $(MLX_PATH)/build && cmake ..
+	make -C $(MLX_PATH)/build
 
 clean:
 	@$(MAKE) -C libft clean
@@ -47,6 +55,7 @@ clean:
 
 fclean: clean
 	@$(MAKE) -C libft fclean
+	rm -rf $(MLX_PATH)
 	@rm -rf $(NAME)
 	@rm -rf $(MLX)
 

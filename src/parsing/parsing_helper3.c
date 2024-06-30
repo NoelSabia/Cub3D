@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_helper3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:27:24 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/11 16:47:34 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/16 13:08:55 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,29 +81,37 @@ void	out_of_bounce_procection(t_parsing *parse)
 	}
 }
 
-//TODO: flood fill isnt working properly right now
-// void	flood_fill(t_parsing *parse, char **map, int rows, int cols)
-// {
-// 	if (parse->x < 0 || parse->x >= parse->rows || parse->y < 0
-// 		|| parse->y >= parse->cols
-// 		|| parse->map[parse->x][parse->y] != '0')
-// 		return ;
-// 	flood_fill(parse, parse->map[parse->x + 1][parse->y],
-// 		parse->rows, parse->cols);
-// 	flood_fill(parse, parse->map[parse->x - 1][parse->y],
-// 		parse->rows, parse->cols);
-// 	flood_fill(parse, parse->map[parse->x][parse->y + 1],
-// 		parse->rows, parse->cols);
-// 	flood_fill(parse, parse->map[parse->x][parse->y - 1],
-// 		parse->rows, parse->cols);
-// }
+//x - line index, y - column index, so that map[x][y]
+//in our code cols - how many lines, rows - how many columns
+void	flood_fill(t_parsing *parse, int x, int y, char **map_copy)
+{
+	printf("ff coordinates: [%d] [%d]\n", x, y);
+
+	if (x < 0 || x >= parse->cols || y < 0\
+		|| y >= (int)ft_strlen(map_copy[x]))
+		clean_exit("Error: player isn't locked inside the map\n");
+	else if (map_copy[x][y] == '1' || map_copy[x][y] == '*')
+		return ;
+	printf("the length of line: %d\n", (int)ft_strlen(map_copy[x]));
+	map_copy[x][y] = '*';
+	flood_fill(parse, x - 1, y, map_copy);
+	flood_fill(parse, x + 1, y, map_copy);
+	flood_fill(parse, x, y - 1, map_copy);
+	flood_fill(parse, x, y + 1, map_copy);
+}
 
 void	flood_fill_organizer(t_parsing *parse)
 {
+	char	**map_copy;
+
 	out_of_bounce_procection(parse);
-	// parse->x = 0;
-	// parse->y = 0;
-	// for (int i = 0; parse->map[i]; i++)
-	// 	printf("%s", parse->map[i]);
-	// flood_fill(parse, parse->map, parse->rows, parse->cols);
+	parse->x = 0;
+	parse->y = 0;
+	for (int i = 0; parse->map[i]; i++)
+		printf("%s", parse->map[i]);
+	printf("the rows: %d, the columns: %d\n", parse->rows, parse->cols);
+	find_player(parse);
+	map_copy = map_copy_it(parse);
+	flood_fill(parse, parse->x, parse->y, map_copy);
+	printf("success, player locked\n");
 }
