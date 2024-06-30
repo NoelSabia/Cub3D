@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/14 13:22:14 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/30 12:08:09 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	raycasting(t_mlx *mlx)
 	i = 0;
 	intersection_x = 0;
 	intersection_y = 0;
-	mlx->ply->angle = (M_PI / 2) - FOV / 2;
+	mlx->ply->angle = (M_PI / 2) - FOV / 2; //PI/2 shows 90 degree minus the FOV/2 which is 30 so = 60 for each side
 	while (i < SCREEN_WIDTH)
 	{
-		break ;
+		intersection_x = get_intersection_x
+		break;
 	}
 }
