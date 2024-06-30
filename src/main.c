@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 00:47:44 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/13 11:00:45 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/30 13:35:25 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	clean_exit(char *str)
 {
 	printf("Error\n");
-	printf("%s\n", str);
+	printf("%s", str);
 	ft_free_all();
 	exit(1);
 }
