@@ -81,7 +81,6 @@ void	out_of_bounce_procection(t_parsing *parse)
 	}
 }
 
-//TODO: flood fill isnt working properly right now
 //x - line index, y - column index, so that map[x][y]
 //in our code cols - how many lines, rows - how many columns
 void	flood_fill(t_parsing *parse, int x, int y, char **map_copy)

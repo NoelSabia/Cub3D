@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <stdbool.h>
+# include <math.h>
 
 # include "../../libft/libft.h"
 # include "../../MLX42/include/MLX42/MLX42.h"
@@ -26,7 +27,7 @@
 /*Defines*/
 # define SCREEN_WIDTH 1900
 # define SCREEN_HEIGHT 1000
-# define TILE_SIZE 30
+# define TILE_SIZE 50 
 # define FOV 60
 # define ROTATION_SPEED 0.045
 # define PLAYER_SPEED 4
@@ -53,6 +54,8 @@ typedef struct s_parsing
 	int		y;
 	int		rows;
 	int		cols;
+	int		player_x;
+	int		player_y;
 }	t_parsing;
 
 void	parsing(t_parsing *parse, char *filename);
@@ -63,8 +66,36 @@ void	find_player(t_parsing *parse);
 char	**map_copy_it(t_parsing *parse);
 
 /*Player_movement functions and structs*/
+typedef struct s_player
+{
+	int		plyr_x;
+	int		plyr_y;
+	double	angle;
+	float	fov_radians;
+	int		rotation;
+	int		left_or_right;
+	int		up_or_down;
+}	t_player;
+
+void	keyhook_organizer(void *mlx_copy);
 
 /*Raycasting functions and structs*/
+typedef struct s_ray
+{
+	double	distance_to_wall;
+	int		flag_for_wall;
+}	t_ray;
+
+typedef struct s_mlx
+{
+	mlx_image_t		*img;
+	mlx_t			*mlx_p;
+	t_ray			*ray;
+	t_player		*ply;
+}	t_mlx;
+
+void	raycasting(t_mlx *mlx);
+void	init(t_mlx *mlx, t_parsing *parse);
 
 /*Walls funcitons and structs*/
 

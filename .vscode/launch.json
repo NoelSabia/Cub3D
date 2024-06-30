@@ -5,8 +5,8 @@
       "name": "Cub3d: Debug Session (LINUX)",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/minishell",
-      "args": [],
+      "program": "${workspaceFolder}/Cub3D",
+      "args": ["test.cub"],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
@@ -19,37 +19,16 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "sudo minishell prelaunch",
+      "preLaunchTask": "sudo Cub3D prelaunch",
       "miDebuggerPath": "/usr/bin/gdb"
     },
-    {
-      "name": "Cub3d: Debug Session (MAC)",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/minishell/minishell",
-      "args": [],
-      "stopAtEntry": false,
-      "cwd": "${workspaceFolder}",
-      "environment": [],
-      "externalConsole": false,
-      "MIMode": "lldb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for lldb",
-          "text": "command script import /path/to/lldb/pretty_printers.py",
-          "ignoreFailures": true
-        }
-      ],
-      "preLaunchTask": "minishell prelaunch",
-      "miDebuggerPath": "/usr/bin/lldb"
-    },
-    {
+   {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/jkauker/Documents/minishell/src/builtin",
-      "program": "/Users/jkauker/Documents/minishell/src/builtin/build/Debug/outDebug"
+      "cwd": "/Users/nsabia/Documents/Circel4/Cub3D/src/builtin",
+      "program": "/Users/nsabie/Documents/minishell/src/builtin/build/Debug/outDebug"
     }
   ]
 }

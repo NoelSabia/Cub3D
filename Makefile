@@ -2,14 +2,16 @@ NAME := Cub3D
 
 CFLAGS = -Wextra -Wall
 
-HEADERS := -I ./include -I ./libft
+HEADERS := -I ./include -I ./libft -I ./MLX/include
 
 SRCDIR := ./src/
 SRCS := $(SRCDIR)main.c \
+		$(SRCDIR)init.c \
         $(SRCDIR)parsing/parsing.c \
 		$(SRCDIR)parsing/parsing_helper.c \
 		$(SRCDIR)parsing/parsing_helper2.c \
 		$(SRCDIR)parsing/parsing_helper3.c \
+		$(SRCDIR)raycasting/raycasting.c  \
 		$(SRCDIR)parsing/parsing_helper4.c
 
 OBJDIR := ./obj/
@@ -20,6 +22,11 @@ MLX_PATH	= ./MLX42
 MLX			= -ldl -lglfw -pthread -lm
 
 CC := cc
+
+
+MLX_DIR = MLX42
+MLX = $(MLX_DIR)/build/libmlx42.a
+MLX_FLAGS = -L$(MLX_DIR)/build -lmlx42 -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 
 .PHONY: all clean fclean re
 
@@ -43,12 +50,14 @@ $(MLX_LIB):
 
 clean:
 	@$(MAKE) -C libft clean
+	@$(MAKE) -C $(MLX_DIR)/build clean
 	@rm -rf $(OBJDIR)
 
 fclean: clean
 	@$(MAKE) -C libft fclean
 	rm -rf $(MLX_PATH)
 	@rm -rf $(NAME)
+	@rm -rf $(MLX)
 
 re: fclean all
 
