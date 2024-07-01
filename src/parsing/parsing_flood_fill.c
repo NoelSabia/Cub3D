@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_helper3.c                                  :+:      :+:    :+:   */
+/*   parsing_flood_fill.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:27:24 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/16 13:08:55 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:31:10 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*combine_strs(char *str1, char *str2)
 	return (result);
 }
 
-void	out_of_bounce_procection(t_parsing *parse)
+void	out_of_bounce_procection(t_mlx *mlx)
 {
 	int	len;
 	int	longest;
@@ -62,56 +62,47 @@ void	out_of_bounce_procection(t_parsing *parse)
 	len = 0;
 	i = -1;
 	longest = 0;
-	while (parse->map[++i])
+	while (mlx->parse->map[++i])
 	{
-		len = ft_strlen(parse->map[i]);
+		len = ft_strlen(mlx->parse->map[i]);
 		if (len > longest)
 			longest = len;
 	}
 	longest--;
-	parse->cols = i;
-	parse->rows = longest;
+	mlx->parse->cols = i;
+	mlx->parse->rows = longest;
 	i = -1;
-	while (parse->map[++i])
+	while (mlx->parse->map[++i])
 	{
 		m = 0;
-		while (parse->map[i][m])
+		while (mlx->parse->map[i][m])
 			m++;
-		parse->map[i] = combine_strs(parse->map[i], fill_spaces(longest - m));
+		mlx->parse->map[i] = combine_strs(mlx->parse->map[i], fill_spaces(longest - m));
 	}
 }
 
-//x - line index, y - column index, so that map[x][y]
-//in our code cols - how many lines, rows - how many columns
-void	flood_fill(t_parsing *parse, int x, int y, char **map_copy)
+void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy)
 {
-	printf("ff coordinates: [%d] [%d]\n", x, y);
-
-	if (x < 0 || x >= parse->cols || y < 0\
+	if (x < 0 || x >= mlx->parse->cols || y < 0\
 		|| y >= (int)ft_strlen(map_copy[x]))
 		clean_exit("Error: player isn't locked inside the map\n");
 	else if (map_copy[x][y] == '1' || map_copy[x][y] == '*')
 		return ;
-	printf("the length of line: %d\n", (int)ft_strlen(map_copy[x]));
 	map_copy[x][y] = '*';
-	flood_fill(parse, x - 1, y, map_copy);
-	flood_fill(parse, x + 1, y, map_copy);
-	flood_fill(parse, x, y - 1, map_copy);
-	flood_fill(parse, x, y + 1, map_copy);
+	flood_fill(mlx, x - 1, y, map_copy);
+	flood_fill(mlx, x + 1, y, map_copy);
+	flood_fill(mlx, x, y - 1, map_copy);
+	flood_fill(mlx, x, y + 1, map_copy);
 }
 
-void	flood_fill_organizer(t_parsing *parse)
+void	flood_fill_organizer(t_mlx *mlx)
 {
 	char	**map_copy;
 
-	out_of_bounce_procection(parse);
-	parse->x = 0;
-	parse->y = 0;
-	for (int i = 0; parse->map[i]; i++)
-		printf("%s", parse->map[i]);
-	printf("the rows: %d, the columns: %d\n", parse->rows, parse->cols);
-	find_player(parse);
-	map_copy = map_copy_it(parse);
-	flood_fill(parse, parse->x, parse->y, map_copy);
-	printf("success, player locked\n");
+	out_of_bounce_procection(mlx);
+	mlx->parse->x = 0;
+	mlx->parse->y = 0;
+	find_player(mlx);
+	map_copy = map_copy_it(mlx);
+	flood_fill(mlx, mlx->parse->x, mlx->parse->y, map_copy);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/07 20:30:34 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 16:30:00 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*replace_tab(const char *str, char old_char, const char *new_str)
 	return (result);
 }
 
-void	put_in_2d_array(t_parsing *parse, char *clean_output)
+void	put_in_2d_array(t_mlx *mlx, char *clean_output)
 {
 	int		i;
 	int		j;
@@ -87,7 +87,7 @@ void	put_in_2d_array(t_parsing *parse, char *clean_output)
 	while (clean_output[++i])
 		if (clean_output[i] == '\n')
 			line_count++;
-	parse->input = ft_malloc((line_count + 3) * sizeof(char *));
+	mlx->parse->input = ft_malloc((line_count + 3) * sizeof(char *));
 	i = 0;
 	while (clean_output[i])
 	{
@@ -96,19 +96,19 @@ void	put_in_2d_array(t_parsing *parse, char *clean_output)
 		str = ft_strncpy(clean_output, j, i);
 		i++;
 		j = i;
-		parse->input[k++] = ft_strdup(str);
+		mlx->parse->input[k++] = ft_strdup(str);
 	}
-	parse->input[k] = NULL;
+	mlx->parse->input[k] = NULL;
 }
 
-void	parsing(t_parsing *parse, char *filename)
+void	parsing(t_mlx *mlx, char *filename)
 {
 	char	*output;
 	char	*clean_output;
 
 	output = read_into_input(filename);
 	clean_output = replace_tab(output, '	', "    ");
-	put_in_2d_array(parse, clean_output);
-	fill_parse_struct(parse);
-	validate_map(parse);
+	put_in_2d_array(mlx , clean_output);
+	fill_parse_struct(mlx);
+	validate_map(mlx);
 }

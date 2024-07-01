@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/16 13:09:34 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:22:51 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "../../MLX42/include/MLX42/MLX42.h"
 
 /*Defines*/
-# define SCREEN_WIDTH 1900
-# define SCREEN_HEIGHT 1000
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 # define TILE_SIZE 50 
 # define FOV 60
 # define ROTATION_SPEED 0.045
@@ -35,35 +35,31 @@
 /*Parsing functions and structs*/
 typedef struct s_parsing
 {
-	char	**input;
-	int		input_counter;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	char	*floor;
-	int		north_set;
-	int		south_set;
-	int		west_set;
-	int		east_set;
-	int		floor_set;
-	int		ceiling_set;
-	char	*ceiling;
-	char	**map;
-	int		x;
-	int		y;
-	int		rows;
-	int		cols;
-	int		player_x;
-	int		player_y;
+	char		**input;
+	int			input_counter;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	char		*floor;
+	char		*ceiling;
+	int			north_set;
+	int			south_set;
+	int			west_set;
+	int			east_set;
+	int			floor_set;
+	int			ceiling_set;
+	uint32_t	floor_color;
+	uint32_t	ceiling_color;
+	char		**map;
+	int			x;
+	int			y;
+	int			rows;
+	int			cols;
+	int			player_x;
+	int			player_y;
 }	t_parsing;
 
-void	parsing(t_parsing *parse, char *filename);
-void	fill_parse_struct(t_parsing *parse);
-void	validate_map(t_parsing *parse);
-void	flood_fill_organizer(t_parsing *parse);
-void	find_player(t_parsing *parse);
-char	**map_copy_it(t_parsing *parse);
 
 /*Player_movement functions and structs*/
 typedef struct s_player
@@ -80,24 +76,36 @@ typedef struct s_player
 void	keyhook_organizer(void *mlx_copy);
 
 /*Raycasting functions and structs*/
-typedef struct s_ray
+typedef struct s_raytracing
 {
 	double	distance_to_wall;
 	int		flag_for_wall;
-}	t_ray;
+}	t_raytracing;
 
+/*
+
+*/
 typedef struct s_mlx
 {
 	mlx_image_t		*img;
 	mlx_t			*mlx_p;
-	t_ray			*ray;
+	t_raytracing	*ray;
 	t_player		*ply;
+	t_parsing		*parse;
 }	t_mlx;
 
+void	parsing(t_mlx *mlx, char *filename);
+void	fill_parse_struct(t_mlx *mlx);
+void	validate_map(t_mlx *mlx);
+void	flood_fill_organizer(t_mlx *mlx);
+void	find_player(t_mlx *mlx);
+char	**map_copy_it(t_mlx *mlx);
+
 void	raycasting(t_mlx *mlx);
-void	init(t_mlx *mlx, t_parsing *parse);
+void	init(t_mlx *mlx);
 
 /*Walls funcitons and structs*/
+void	floor_and_ceiling_color(t_mlx *mlx);
 
 /*Main*/
 void	clean_exit(char *str);

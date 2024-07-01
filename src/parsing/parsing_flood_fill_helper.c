@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_helper4.c                                  :+:      :+:    :+:   */
+/*   parsing_flood_fill_helper.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:08:22 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/16 13:08:52 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:14:19 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void find_player(t_parsing *parse)
+void find_player(t_mlx *mlx)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	while(i < parse->cols)
+	while(i < mlx->parse->cols)
 	{
 		j = 0;
-		while(parse->map[i][j] != '\n')
+		while(mlx->parse->map[i][j] != '\n')
 		{
-			if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S'\
-			|| parse->map[i][j] == 'W' || parse->map[i][j] == 'E')
+			if (mlx->parse->map[i][j] == 'N' || mlx->parse->map[i][j] == 'S'\
+			|| mlx->parse->map[i][j] == 'W' || mlx->parse->map[i][j] == 'E')
 			{
-				parse->x = i;
-				parse->y = j;
+				mlx->parse->x = i;
+				mlx->parse->y = j;
 				return ;
 			}
 			j++;
@@ -36,17 +36,16 @@ void find_player(t_parsing *parse)
 	}
 }
 
-//copy of map to flood fill
-char	**map_copy_it(t_parsing *parse)
+char	**map_copy_it(t_mlx *mlx)
 {
 	char	**copy;
 	int		i;
 
-	copy = ft_malloc((parse->cols + 1)*sizeof(char *));
+	copy = ft_malloc((mlx->parse->cols + 1)*sizeof(char *));
 	i = 0;
-	while (i < parse->cols)
+	while (i < mlx->parse->cols)
 	{
-		copy[i] = ft_strdup(parse->map[i]);
+		copy[i] = ft_strdup(mlx->parse->map[i]);
 		i++;
 	}
 	copy[i] = NULL;
