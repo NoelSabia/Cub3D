@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 00:47:44 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 16:31:29 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 22:40:13 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char *argv[])
 	mlx->parse = ft_calloc(1, sizeof(t_parsing));
 	mlx->ply = ft_calloc(1, sizeof(t_player));
 	mlx->ray = ft_calloc(1, sizeof(t_raytracing));
+	mlx->key_data = ft_calloc(1, sizeof(mlx_key_data_t));
 	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
 	parsing(mlx, argv[1]);
 	init(mlx);

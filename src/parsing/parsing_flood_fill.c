@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:27:24 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 16:31:10 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 23:02:07 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ char	*fill_spaces(int len)
 	char	*str;
 	int		counter;
 
-	str = ft_malloc(len + 1);
+	str = ft_malloc(ft_abs(len) + 10);
 	counter = 0;
 	while (counter++ <= len)
 		str = ft_strjoin(" ", str);
+	str[counter] = '\0';
 	return (str);
 }
 
@@ -77,6 +78,8 @@ void	out_of_bounce_procection(t_mlx *mlx)
 		m = 0;
 		while (mlx->parse->map[i][m])
 			m++;
+		printf("longest: %d\n", longest);
+		printf("m: %d\n", m);
 		mlx->parse->map[i] = combine_strs(mlx->parse->map[i], fill_spaces(longest - m));
 	}
 }
