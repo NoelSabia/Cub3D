@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 17:15:49 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/30 19:45:20 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 13:00:35 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void game_loop(void *mlx_copy)
         while (x < SCREEN_WIDTH)
         {
             if (y <= SCREEN_HEIGHT / 2)
-                mlx_put_pixel(mlx->img, x, y, 120);
+                mlx_put_pixel(mlx->img, x, y, 14753280);
             else
-                mlx_put_pixel(mlx->img, x, y, 230);
+                mlx_put_pixel(mlx->img, x, y, 14753280);
             x++;
         }
         y++;
@@ -46,6 +46,6 @@ void	init(t_mlx *mlx, t_parsing *parse)
 	// mlx->ply->angle = M_PI;
 	floor_and_ceiling_color(parse);
 	mlx_loop_hook(mlx->mlx_p, &game_loop, mlx);
-	mlx_key_hook(mlx->mlx_p, &keyhook_organizer, &mlx);
+	// mlx_key_hook(mlx->mlx_p, &keyhook_organizer, &mlx);
 	mlx_loop(mlx->mlx_p);
 }

@@ -12,8 +12,9 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/parsing_flood_fill_helper.c \
 		$(SRCDIR)parsing/parsing_flood_fill_preparation.c \
 		$(SRCDIR)parsing/parsing_flood_fill.c \
-		$(SRCDIR)walls/floor_ceiling_color.c \
-		$(SRCDIR)raycasting/raycasting.c
+		$(SRCDIR)player_movement/player_movement.c \
+		$(SRCDIR)raycasting/raycasting.c \
+		$(SRCDIR)walls/floor_ceiling_color.c
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)

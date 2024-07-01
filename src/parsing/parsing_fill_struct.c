@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_helper.c                                   :+:      :+:    :+:   */
+/*   parsing_fill_struct.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:05:20 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/30 13:28:54 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/06/30 22:01:24 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ char	*clean_data(char *str)
 	char	*result;
 
 	i = 0;
-	while (str[i] && (str[i] == 'N' || str[i] == 'O' || str[i] == 'S'
-			|| str[i] == 'W' || str[i] == 'A' || str[i] == 'F' || str[i] == 'E'
-			|| str[i] == 'C' || str[i] == 32 || str[i] == '\t'))
+	while (str[i] && ft_strchr("NOSWAFEC 	", str[i]))
 		i++;
 	result = ft_strncpy(str, i, ft_strlen(str));
 	return (result);

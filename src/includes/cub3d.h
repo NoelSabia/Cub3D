@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/30 16:30:42 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 13:10:21 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "../../MLX42/include/MLX42/MLX42.h"
 
 /*Defines*/
-# define SCREEN_WIDTH 1900
-# define SCREEN_HEIGHT 1000
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 # define TILE_SIZE 50 
 # define FOV 60
 # define ROTATION_SPEED 0.045
@@ -82,17 +82,20 @@ typedef struct s_player
 void	keyhook_organizer(void *mlx_copy);
 
 /*Raycasting functions and structs*/
-typedef struct s_ray
+typedef struct s_raytracing
 {
 	double	distance_to_wall;
 	int		flag_for_wall;
-}	t_ray;
+}	t_raytracing;
 
+/*
+
+*/
 typedef struct s_mlx
 {
 	mlx_image_t		*img;
 	mlx_t			*mlx_p;
-	t_ray			*ray;
+	t_raytracing	*ray;
 	t_player		*ply;
 }	t_mlx;
 
