@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:05:20 by nsabia            #+#    #+#             */
-/*   Updated: 2024/06/30 22:01:24 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 16:13:47 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*clean_data(char *str)
 	return (result);
 }
 
-void	check_if_exists(char *str1, char *str2, t_parsing *parse, char *line)
+void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line)
 {
 	char	*str;
 
@@ -32,61 +32,61 @@ void	check_if_exists(char *str1, char *str2, t_parsing *parse, char *line)
 		return ;
 	else if (ft_strncmp(str1, "NO", 2) == 0)
 	{
-		if (parse->north_set)
+		if (mlx->parse->north_set)
 			clean_exit("Error: 'NO' specified more than once.");
 		str = clean_data(line);
-		parse->north = str;
-		parse->north_set = 1;
+		mlx->parse->north = str;
+		mlx->parse->north_set = 1;
 	}
 	else if (ft_strncmp(str1, "SO", 2) == 0)
 	{
-		if (parse->south_set)
+		if (mlx->parse->south_set)
 			clean_exit("Error: 'SO' specified more than once.");
 		str = clean_data(line);
-		parse->south = str;
-		parse->south_set = 1;
+		mlx->parse->south = str;
+		mlx->parse->south_set = 1;
 	}
 	else if (ft_strncmp(str1, "WE", 2) == 0)
 	{
-		if (parse->west_set)
+		if (mlx->parse->west_set)
 			clean_exit("Error: 'WE' specified more than once.");
 		str = clean_data(line);
-		parse->west = str;
-		parse->west_set = 1;
+		mlx->parse->west = str;
+		mlx->parse->west_set = 1;
 	}
 	else if (ft_strncmp(str1, "EA", 2) == 0)
 	{
-		if (parse->east_set)
+		if (mlx->parse->east_set)
 			clean_exit("Error: 'EA' specified more than once.");
 		str = clean_data(line);
-		parse->east = str;
-		parse->east_set = 1;
+		mlx->parse->east = str;
+		mlx->parse->east_set = 1;
 	}
 	else if (ft_strncmp(str2, "F", 1) == 0)
 	{
-		if (parse->floor_set)
+		if (mlx->parse->floor_set)
 			clean_exit("Error: 'F' specified more than once.");
 		str = clean_data(line);
-		parse->floor = str;
-		parse->floor_set = 1;
+		mlx->parse->floor = str;
+		mlx->parse->floor_set = 1;
 	}
 	else if (ft_strncmp(str2, "C", 1) == 0)
 	{
-		if (parse->ceiling_set)
+		if (mlx->parse->ceiling_set)
 			clean_exit("Error: 'C' specified more than once.");
 		str = clean_data(line);
-		parse->ceiling = str;
-		parse->ceiling_set = 1;
+		mlx->parse->ceiling = str;
+		mlx->parse->ceiling_set = 1;
 	}
 	else if (ft_strncmp(str1, "0", 1) == 0 || ft_strncmp(str1, "1", 1) == 0
 		|| ft_strncmp(str2, "0", 1) == 0 || ft_strncmp(str2, "1", 1) == 0)
 		return ;
 	else
 		clean_exit("Not all elements included in the .cub file!");
-	parse->input_counter++;
+	mlx->parse->input_counter++;
 }
 
-void	fill_parse_struct(t_parsing *parse)
+void	fill_parse_struct(t_mlx *mlx)
 {
 	int		i;
 	int		m;
@@ -95,19 +95,19 @@ void	fill_parse_struct(t_parsing *parse)
 	char	*line;
 
 	i = -1;
-	parse->input_counter = 0;
-	while (parse->input[++i])
+	mlx->parse->input_counter = 0;
+	while (mlx->parse->input[++i])
 	{
 		m = 0;
-		while (parse->input[i][m] == '\t' || parse->input[i][m] == 32)
+		while (mlx->parse->input[i][m] == '\t' || mlx->parse->input[i][m] == 32)
 			m++;
-		str1 = ft_strncpy(&parse->input[i][m], 0, 1);
-		str2 = ft_strncpy(&parse->input[i][m], 0, 0);
-		line = parse->input[i];
-		check_if_exists(str1, str2, parse, line);
+		str1 = ft_strncpy(&mlx->parse->input[i][m], 0, 1);
+		str2 = ft_strncpy(&mlx->parse->input[i][m], 0, 0);
+		line = mlx->parse->input[i];
+		check_if_exists(str1, str2, mlx, line);
 	}
-	if (parse->north_set != 1 || parse->west_set != 1
-		|| parse->south_set != 1 || parse->east_set != 1
-		|| parse->ceiling_set != 1 || parse->floor_set != 1)
+	if (mlx->parse->north_set != 1 || mlx->parse->west_set != 1
+		|| mlx->parse->south_set != 1 || mlx->parse->east_set != 1
+		|| mlx->parse->ceiling_set != 1 || mlx->parse->floor_set != 1)
 		clean_exit("Not all elements included in the .cub file!");
 }

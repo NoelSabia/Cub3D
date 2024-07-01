@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 13:10:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 16:22:51 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,6 @@ typedef struct s_parsing
 	int			player_y;
 }	t_parsing;
 
-void	parsing(t_parsing *parse, char *filename);
-void	fill_parse_struct(t_parsing *parse);
-void	validate_map(t_parsing *parse);
-void	flood_fill_organizer(t_parsing *parse);
-void	find_player(t_parsing *parse);
-char	**map_copy_it(t_parsing *parse);
 
 /*Player_movement functions and structs*/
 typedef struct s_player
@@ -97,13 +91,21 @@ typedef struct s_mlx
 	mlx_t			*mlx_p;
 	t_raytracing	*ray;
 	t_player		*ply;
+	t_parsing		*parse;
 }	t_mlx;
 
+void	parsing(t_mlx *mlx, char *filename);
+void	fill_parse_struct(t_mlx *mlx);
+void	validate_map(t_mlx *mlx);
+void	flood_fill_organizer(t_mlx *mlx);
+void	find_player(t_mlx *mlx);
+char	**map_copy_it(t_mlx *mlx);
+
 void	raycasting(t_mlx *mlx);
-void	init(t_mlx *mlx, t_parsing *parse);
+void	init(t_mlx *mlx);
 
 /*Walls funcitons and structs*/
-void	floor_and_ceiling_color(t_parsing *parse);
+void	floor_and_ceiling_color(t_mlx *mlx);
 
 /*Main*/
 void	clean_exit(char *str);

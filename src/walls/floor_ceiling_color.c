@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 13:41:50 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 12:45:26 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 16:27:56 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char    *char_to_str(char c)
     return (result);
 }
 
-void    floor_color(t_parsing*parse)
+void    floor_color(t_mlx *mlx)
 {
     uint8_t floor_color[3];
     char    *temp;
@@ -43,30 +43,30 @@ void    floor_color(t_parsing*parse)
 
     k = 0;
     i = 0;
-    check_string(parse->floor);
-    while (strchr(" \t", parse->floor[k]))
+    check_string(mlx->parse->floor);
+    while (strchr(" \t", mlx->parse->floor[k]))
         k++;
-    while (parse->floor[k] && i < 3)
+    while (mlx->parse->floor[k] && i < 3)
     {
         temp = malloc(1);
         temp[0] = '\0';
-        while (strchr("0123456789", parse->floor[k]))
+        while (strchr("0123456789", mlx->parse->floor[k]))
         {
-            temp2 = char_to_str(parse->floor[k++]);
+            temp2 = char_to_str(mlx->parse->floor[k++]);
             temp = ft_strjoin(temp, temp2);
         }
         floor_color[i++] = ft_atoi(temp);
         if (ft_atoi(temp) < 0 || ft_atoi(temp) > 255)
             clean_exit("Wrong number in F or C choose between 0 and 255!");
-        if (parse->floor[k] == ',')
+        if (mlx->parse->floor[k] == ',')
             k++;
     }
     if (i != 3)
         clean_exit("Invalid floor color format!");
-   parse->floor_color = (floor_color[0] << 16) | (floor_color[1] << 8) | floor_color[2]; 
+   mlx->parse->floor_color = (floor_color[0] << 24) | (floor_color[1] << 16) | (floor_color[2] << 8) | 0xFF;
 }
 
-void floor_and_ceiling_color(t_parsing *parse)
+void floor_and_ceiling_color(t_mlx *mlx)
 {
     uint8_t ceiling[3];
     char    *temp;
@@ -76,27 +76,27 @@ void floor_and_ceiling_color(t_parsing *parse)
 
     k = 0;
     i = 0;
-    floor_color(parse);
-    check_string(parse->ceiling);
-    while (strchr(" \t", parse->ceiling[k]))
+    floor_color(mlx);
+    check_string(mlx->parse->ceiling);
+    while (strchr(" \t", mlx->parse->ceiling[k]))
         k++;
-    while (parse->ceiling[k] && i < 3)
+    while (mlx->parse->ceiling[k] && i < 3)
     {
         temp = malloc(1);
         temp[0] = '\0';
-        while (strchr("0123456789", parse->ceiling[k]))
+        while (strchr("0123456789", mlx->parse->ceiling[k]))
         {
-            temp2 = char_to_str(parse->ceiling[k++]);
+            temp2 = char_to_str(mlx->parse->ceiling[k++]);
             temp = ft_strjoin(temp, temp2);
         }
         ceiling[i++] = ft_atoi(temp);
         if (ft_atoi(temp) < 0 || ft_atoi(temp) > 255)
             clean_exit("Wrong number in F or C choose between 0 and 255!");
-        if (parse->ceiling[k] == ',')
+        if (mlx->parse->ceiling[k] == ',')
             k++;
     }
     if (i != 3)
         clean_exit("Invalid ceiling color format!");
-   parse->ceiling_color = (ceiling[0] << 16) | (ceiling[1] << 8) | ceiling[2];
+   mlx->parse->ceiling_color = (ceiling[0] << 24) | (ceiling[1] << 16) | (ceiling[2] << 8) | 0xFF;
 }
     
