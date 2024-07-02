@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 23:01:54 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/02 10:56:21 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_player
 	int		up_or_down;
 }	t_player;
 
-void	*keyhook_organizer(void *mlx_copy);
+void	*keyhook_organizer(mlx_key_data_t keydata);
 
 /*Raycasting functions and structs*/
 typedef struct s_raytracing
