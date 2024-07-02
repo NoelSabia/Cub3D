@@ -11,8 +11,3 @@ cd MLX42
 cmake -B build # build here refers to the outputfolder.
 cmake --build build -j4 # or do make -C build -j4
 ```
-
-# Raycasting steps (simplified):
-1. Get the exact position of the player inside of the tille he is standing
-2. Get the rest of the lenght until collision with a wall
-3. Repeat until the FOV was covert
