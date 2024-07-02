@@ -1,6 +1,6 @@
 NAME := Cub3D
 
-CFLAGS = -Wextra -Wall 
+CFLAGS = -Wextra -Wall #-Werror
 
 HEADERS := -I ./include -I ./libft -I ./MLX/include
 
@@ -19,7 +19,7 @@ SRCS := $(SRCDIR)main.c \
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
-CC := cc
+CC := gcc -fsanitize=address -g
 
 
 MLX_DIR = MLX42
