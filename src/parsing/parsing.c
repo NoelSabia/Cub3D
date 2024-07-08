@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 16:30:00 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:28:22 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,25 @@ void	put_in_2d_array(t_mlx *mlx, char *clean_output)
 	mlx->parse->input[k] = NULL;
 }
 
+void	player_direction(t_mlx *mlx)
+{
+	char	c;
+
+	c = mlx->parse->map[mlx->parse->x][mlx->parse->y];
+	if (c == 'W')
+		mlx->ply->angle = 0;
+	else if (c == 'N')
+		mlx->ply->angle = 90;	
+	else if (c == 'E')
+		mlx->ply->angle = 180;
+	else if (c == 'S')
+		mlx->ply->angle = 270;
+	else
+		clean_exit("Player spawn is not W N E or S!");
+	mlx->ply->most_left_angle = mlx->ply->angle - 30;
+	mlx->ply->most_right_angle = mlx->ply->angle + 30;
+}
+
 void	parsing(t_mlx *mlx, char *filename)
 {
 	char	*output;
@@ -111,4 +130,5 @@ void	parsing(t_mlx *mlx, char *filename)
 	put_in_2d_array(mlx , clean_output);
 	fill_parse_struct(mlx);
 	validate_map(mlx);
+	player_direction(mlx);
 }

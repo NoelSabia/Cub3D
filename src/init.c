@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 17:15:49 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/04 12:12:59 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:33:27 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	init(t_mlx *mlx)
 	mlx->ply->plyr_x = mlx->parse->x;
     mlx->ply->plyr_y = mlx->parse->y;
 	mlx->ply->fov_radians = (FOV * M_PI) / 180;
-	mlx->ply->angle = M_PI;
 	floor_and_ceiling_color(mlx);
 	mlx_loop_hook(mlx->mlx_p, &game_loop, mlx);
 	mlx_key_hook(mlx->mlx_p, &keyhook_organizer, mlx);

@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/03 17:15:29 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:33:32 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,16 @@ typedef struct s_player
 	int		plyr_y;
 	int		plyr_inside_tile_x;
 	int		plyr_inside_tile_y;
-	double	angle;
+	int		most_left_angle;
+	int		angle;
+	int		most_right_angle;
 	float	fov_radians;
 	int		rotation;
 	int		left_or_right;
 	int		up_or_down;
 }	t_player;
 
-void	*keyhook_organizer(mlx_key_data_t keydata, void *mlx);
+void	keyhook_organizer(mlx_key_data_t keydata, void *mlx);
 
 /*Raycasting functions and structs*/
 typedef struct s_raytracing
