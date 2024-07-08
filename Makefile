@@ -1,6 +1,6 @@
 NAME := Cub3D
 
-CFLAGS = -Wextra -Wall 
+CFLAGS = -Wextra -Wall
 
 HEADERS := -I ./include -I ./libft -I ./MLX/include
 
@@ -14,12 +14,13 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/parsing_flood_fill.c \
 		$(SRCDIR)player_movement/player_movement.c \
 		$(SRCDIR)raycasting/raycasting.c \
+		$(SRCDIR)raycasting/minimap.c \
 		$(SRCDIR)walls/floor_ceiling_color.c
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
-CC := cc
+CC := cc -fsanitize=address -g
 
 
 MLX_DIR = MLX42

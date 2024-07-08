@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 16:22:51 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/08 14:12:19 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /*Defines*/
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
-# define TILE_SIZE 50 
+# define TILE_SIZE 50
 # define FOV 60
 # define ROTATION_SPEED 0.045
 # define PLAYER_SPEED 4
@@ -78,8 +78,10 @@ void	keyhook_organizer(void *mlx_copy);
 /*Raycasting functions and structs*/
 typedef struct s_raytracing
 {
-	double	distance_to_wall;
-	int		flag_for_wall;
+	mlx_image_t		*minimap;
+	int				sq_unit;
+	double			distance_to_wall;
+	int				flag_for_wall;
 }	t_raytracing;
 
 /*
@@ -102,6 +104,7 @@ void	find_player(t_mlx *mlx);
 char	**map_copy_it(t_mlx *mlx);
 
 void	raycasting(t_mlx *mlx);
+void	minimap_draw(t_mlx *mlx);
 void	init(t_mlx *mlx);
 
 /*Walls funcitons and structs*/
