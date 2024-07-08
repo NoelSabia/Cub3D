@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:10:10 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/02 11:00:48 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:33:59 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,72 @@ void	esc_key(mlx_key_data_t keydata)
 	}
 }
 
-void	w_a_s_d(mlx_key_data_t keydata)
+void	walk_and_look_around(mlx_key_data_t keydata, t_mlx *mlx)
 {
 	(void)keydata;
+	if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_W))
+	{
+		mlx->ply->plyr_inside_tile_y += PLAYER_SPEED;
+		if (mlx->ply->plyr_inside_tile_y > 50)
+		{
+			mlx->ply->plyr_inside_tile_y = -50;
+			mlx->ply->plyr_y++;
+		}
+	}
+	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_S))
+	{
+		mlx->ply->plyr_inside_tile_y -= PLAYER_SPEED;
+		if (mlx->ply->plyr_inside_tile_y < -50)
+		{
+			mlx->ply->plyr_inside_tile_y = 50;
+			mlx->ply->plyr_y--;
+		}
+	}
+	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_D))
+	{
+		mlx->ply->plyr_inside_tile_x += PLAYER_SPEED;
+		if (mlx->ply->plyr_inside_tile_x > 50)
+		{
+			mlx->ply->plyr_inside_tile_x = -50;
+			mlx->ply->plyr_x++;
+		}
+	}
+	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_A))
+	{
+		mlx->ply->plyr_inside_tile_x -= PLAYER_SPEED;
+		if (mlx->ply->plyr_inside_tile_x < -50)
+		{
+			mlx->ply->plyr_inside_tile_x = 50;
+			mlx->ply->plyr_x--;
+		}
+	}
+	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_LEFT))
+	{
+		mlx->ply->angle -= 1;
+		if (mlx->ply->most_left_angle == 0)
+			mlx->ply->most_left_angle = 360;
+		if (mlx->ply->most_right_angle == 0)
+			mlx->ply->most_right_angle = 360;		
+		mlx->ply->most_right_angle -= 1;
+		mlx->ply->most_left_angle -= 1;
+	}
+	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_RIGHT))
+	{
+		mlx->ply->angle += 1;
+		if (mlx->ply->most_left_angle == 0)
+			mlx->ply->most_left_angle = 360;
+		if (mlx->ply->most_right_angle == 0)
+			mlx->ply->most_right_angle = 360;		
+		mlx->ply->most_right_angle += 1;
+		mlx->ply->most_left_angle += 1;		
+	}
 }
 
-void	arrow_left_arrow_right(mlx_key_data_t keydata)
+void	keyhook_organizer(mlx_key_data_t keydata, void *mlx_copy)
 {
-	(void)keydata;
-}
+	t_mlx *mlx;
 
-void	*keyhook_organizer(mlx_key_data_t keydata)
-{
+	mlx = mlx_copy;
 	esc_key(keydata);
-	w_a_s_d(keydata);
-	arrow_left_arrow_right(keydata);
-	return (0);
+	walk_and_look_around(keydata, mlx);
 }

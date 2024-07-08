@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/02 10:56:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:33:32 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 /*Defines*/
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
-# define TILE_SIZE 50 
+# define TILE_SIZE 50
 # define FOV 60
 # define ROTATION_SPEED 0.045
-# define PLAYER_SPEED 4
+# define PLAYER_SPEED 10
 
 /*Parsing functions and structs*/
 typedef struct s_parsing
@@ -66,14 +66,18 @@ typedef struct s_player
 {
 	int		plyr_x;
 	int		plyr_y;
-	double	angle;
+	int		plyr_inside_tile_x;
+	int		plyr_inside_tile_y;
+	int		most_left_angle;
+	int		angle;
+	int		most_right_angle;
 	float	fov_radians;
 	int		rotation;
 	int		left_or_right;
 	int		up_or_down;
 }	t_player;
 
-void	*keyhook_organizer(mlx_key_data_t keydata);
+void	keyhook_organizer(mlx_key_data_t keydata, void *mlx);
 
 /*Raycasting functions and structs*/
 typedef struct s_raytracing
@@ -82,9 +86,6 @@ typedef struct s_raytracing
 	int		flag_for_wall;
 }	t_raytracing;
 
-/*
-
-*/
 typedef struct s_mlx
 {
 	mlx_image_t		*img;
