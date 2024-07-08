@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/08 17:28:22 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:41:20 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*replace_tab(const char *str, char old_char, const char *new_str)
 	while (str[++i])
 		if (str[i] == old_char)
 			count++;
-	result = ft_calloc(1, (count * new_str_len) + (ft_strlen(str) + 1));
+	result = ft_calloc(1, (count * new_str_len) + (ft_strlen(str) + 1) + 10);
 	i = -1;
 	result = replace_tab_helper(str, result, &j, &i);
 	result[++j] = '\0';
