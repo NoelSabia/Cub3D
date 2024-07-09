@@ -15,13 +15,13 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)player_movement/player_movement.c \
 		$(SRCDIR)raycasting/raycasting.c \
 		$(SRCDIR)raycasting/minimap.c \
+		$(SRCDIR)raycasting/minimap_draw.c \
 		$(SRCDIR)walls/floor_ceiling_color.c
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
-CC := cc -fsanitize=address -g
-
+CC := cc #-fsanitize=address -g
 
 MLX_DIR = MLX42
 MLX = $(MLX_DIR)/build/libmlx42.a

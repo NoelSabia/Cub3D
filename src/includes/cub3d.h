@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/08 14:12:19 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/09 10:09:20 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_parsing
 	int			y;
 	int			rows;
 	int			cols;
-	int			player_x;
+	int			player_x; //values are mixed, do we need them?
 	int			player_y;
 }	t_parsing;
 
@@ -66,6 +66,8 @@ typedef struct s_player
 {
 	int		plyr_x;
 	int		plyr_y;
+	int		coord_x; //to store player's position in pixels
+	int		coord_y;
 	double	angle;
 	float	fov_radians;
 	int		rotation;
@@ -105,6 +107,8 @@ char	**map_copy_it(t_mlx *mlx);
 
 void	raycasting(t_mlx *mlx);
 void	minimap_draw(t_mlx *mlx);
+void	draw_player (t_mlx *mlx);
+void	draw_walls(t_mlx *mlx);
 void	init(t_mlx *mlx);
 
 /*Walls funcitons and structs*/
