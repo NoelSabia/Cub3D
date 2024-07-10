@@ -1,6 +1,6 @@
-NAME := Cub3D
+NAME := cub3D
 
-CFLAGS = -Wextra -Wall
+CFLAGS = -Wextra -Wall #-Werror
 
 HEADERS := -I ./include -I ./libft -I ./MLX/include
 

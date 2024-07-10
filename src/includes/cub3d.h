@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/10 13:37:51 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:29:21 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define TILE_SIZE 50
 # define FOV 60
 # define ROTATION_SPEED 0.045
-# define PLAYER_SPEED 4
+# define PLAYER_SPEED 10
 
 /*Parsing functions and structs*/
 typedef struct s_parsing
@@ -66,16 +66,20 @@ typedef struct s_player
 {
 	int		plyr_x;
 	int		plyr_y;
-	float		coord_x; //to store player's position in pixels
-	float		coord_y;
-	double	angle; //changed type for float
-	double	fov_radians;
+	int		coord_x; //to store player's position in pixels
+	int		coord_y;
+	int		plyr_inside_tile_x;
+	int		plyr_inside_tile_y;
+	int		most_left_angle;
+	int		angle;
+	int		most_right_angle;
+	float	fov_radians;
 	int		rotation;
 	int		left_or_right;
 	int		up_or_down;
 }	t_player;
 
-void	keyhook_organizer(void *mlx_copy);
+void	keyhook_organizer(mlx_key_data_t keydata, void *mlx);
 
 /*Raycasting functions and structs*/
 typedef struct s_raytracing
@@ -91,9 +95,6 @@ typedef struct s_raytracing
 	int				flag_for_wall;
 }	t_raytracing;
 
-/*
-
-*/
 typedef struct s_mlx
 {
 	mlx_image_t		*img;
@@ -101,6 +102,7 @@ typedef struct s_mlx
 	t_raytracing	*ray;
 	t_player		*ply;
 	t_parsing		*parse;
+	mlx_key_data_t	*key_data;
 }	t_mlx;
 
 void	parsing(t_mlx *mlx, char *filename);
@@ -109,6 +111,8 @@ void	validate_map(t_mlx *mlx);
 void	flood_fill_organizer(t_mlx *mlx);
 void	find_player(t_mlx *mlx);
 char	**map_copy_it(t_mlx *mlx);
+
+int		ft_abs(int num);
 
 void	raycasting(t_mlx *mlx);
 void	minimap_draw(t_mlx *mlx);

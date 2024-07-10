@@ -6,11 +6,18 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:08:22 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/01 16:14:19 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/01 23:01:36 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	ft_abs(int num)
+{
+	if (num < 0)
+		num *= -1;
+	return (num);
+}
 
 void find_player(t_mlx *mlx)
 {

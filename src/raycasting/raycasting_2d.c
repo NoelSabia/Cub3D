@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_2d.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/10 14:05:33 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:37:33 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	raycasting(t_mlx *mlx)
 	mlx->ray->first_ray_angle = mlx->ply->angle - mlx->ply->fov_radians / 2;
 	mlx->ray->ray_step = (mlx->ply->angle + mlx->ply->fov_radians) / SCREEN_WIDTH;
 
-	printf("init values2: [%f][%f]\n", mlx->ply->coord_x, mlx->ply->coord_y);
+	printf("init values2: [%d][%d]\n", mlx->ply->coord_x, mlx->ply->coord_y);
 	mlx->ray->da = 64 * (mlx->ply->plyr_y + 1) - mlx->ply->coord_x; // x and y, what for coordinate
-	printf("the y index is: %d, the coordinate is: %f\n", mlx->ply->plyr_y, mlx->ply->coord_x);
+	printf("the y index is: %d, the coordinate is: %d\n", mlx->ply->plyr_y, mlx->ply->coord_x);
 	printf("the dx is: %f\n", mlx->ray->da);
 	mlx->ray->db = tan(mlx->ray->first_ray_angle) * mlx->ray->da;
 	printf("the dy is: %f\n", mlx->ray->db);
