@@ -13,7 +13,7 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/parsing_flood_fill_preparation.c \
 		$(SRCDIR)parsing/parsing_flood_fill.c \
 		$(SRCDIR)player_movement/player_movement.c \
-		$(SRCDIR)raycasting/raycasting.c \
+		$(SRCDIR)raycasting/raycasting_2d.c \
 		$(SRCDIR)raycasting/minimap.c \
 		$(SRCDIR)raycasting/minimap_draw.c \
 		$(SRCDIR)walls/floor_ceiling_color.c

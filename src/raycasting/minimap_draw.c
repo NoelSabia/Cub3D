@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:08:06 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/09 10:08:42 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:54:06 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //rows and cols show the index, not a number, it's one less and they are mixed
 void put_block(t_mlx *mlx, int i, int j)
 {
+	//printf("put block\n");
 	int		i_end;
 	int		j_end;
 	int		j_zero;
@@ -39,6 +40,7 @@ void put_block(t_mlx *mlx, int i, int j)
 
 void draw_vert (t_mlx *mlx)
 {
+	//printf("draw vert\n");
 	int		i;
 	int		j;
 	int		k;
@@ -61,6 +63,7 @@ void draw_vert (t_mlx *mlx)
 
 void draw_horiz (t_mlx *mlx)
 {
+	//printf("draw horiz\n");
 	int		i;
 	int		j;
 	int		k;

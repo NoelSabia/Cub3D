@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/10 14:27:22 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/10 14:29:21 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,12 @@ void	keyhook_organizer(mlx_key_data_t keydata, void *mlx);
 typedef struct s_raytracing
 {
 	mlx_image_t		*minimap;
-	int				sq_unit;
+	float			da; //increase by x_axis
+	float			db; //increase by y_axis
+	float			d_h; //distance to intersection;
+	double			first_ray_angle;
+	float			ray_step;
+	int				sq_unit; //haven't used yet;
 	double			distance_to_wall;
 	int				flag_for_wall;
 }	t_raytracing;
@@ -112,9 +117,13 @@ int		ft_abs(int num);
 
 void	raycasting(t_mlx *mlx);
 void	minimap_draw(t_mlx *mlx);
+void	put_block(t_mlx *mlx, int i, int j);
+void	draw_vert (t_mlx *mlx);
+void	draw_horiz (t_mlx *mlx);
 void	draw_player (t_mlx *mlx);
 void	draw_walls(t_mlx *mlx);
 void	init(t_mlx *mlx);
+float	deg_to_rad(int angle);
 
 /*Walls funcitons and structs*/
 void	floor_and_ceiling_color(t_mlx *mlx);
