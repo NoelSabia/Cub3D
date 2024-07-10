@@ -28,7 +28,6 @@
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 # define TILE_SIZE 50
-# define TILE_SIZE 50
 # define FOV 60
 # define ROTATION_SPEED 0.045
 # define PLAYER_SPEED 10
