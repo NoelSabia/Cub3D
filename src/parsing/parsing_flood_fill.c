@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 12:27:24 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 16:31:10 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/02 11:58:47 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ char	*fill_spaces(int len)
 	char	*str;
 	int		counter;
 
-	str = ft_malloc(len + 1);
+	str = ft_malloc(ft_abs(len) + 10);
 	counter = 0;
 	while (counter++ <= len)
 		str = ft_strjoin(" ", str);
+	str[counter] = '\0';
 	return (str);
 }
 
@@ -52,7 +53,7 @@ char	*combine_strs(char *str1, char *str2)
 	return (result);
 }
 
-void	out_of_bounce_procection(t_mlx *mlx)
+void	out_of_bounds_procection(t_mlx *mlx)
 {
 	int	len;
 	int	longest;
@@ -99,7 +100,7 @@ void	flood_fill_organizer(t_mlx *mlx)
 {
 	char	**map_copy;
 
-	out_of_bounce_procection(mlx);
+	out_of_bounds_procection(mlx);
 	mlx->parse->x = 0;
 	mlx->parse->y = 0;
 	find_player(mlx);
