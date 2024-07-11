@@ -23,3 +23,4 @@ Tests:
 |73896|736|
 |db|db|
 |73896|73896|
+|the new coordinates are: [1728.000000][724.867004]|the new coordinates are: [1728.000000][680.574402]|
