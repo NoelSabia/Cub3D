@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:30:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/10 14:13:09 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:30:17 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void init_values(t_mlx *mlx)
 	mlx->ply->coord_y = 0;
 	mlx->ply->coord_x = mlx->ply->plyr_y * 64 + 32;
 	mlx->ply->coord_y = mlx->ply->plyr_x * 64 + 32;
+	printf("->%d\n", mlx->ply->coord_y);
 
 	mlx->ply->angle = 0;
 	mlx->ply->fov_radians = 0;
@@ -72,5 +73,5 @@ void	minimap_draw(t_mlx *mlx)
 	draw_vert(mlx);
 	draw_horiz(mlx);
 	draw_player(mlx);
-	//raycasting(mlx);
+	raycasting(mlx);
 }

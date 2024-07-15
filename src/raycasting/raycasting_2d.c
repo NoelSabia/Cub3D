@@ -6,11 +6,13 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/10 14:37:33 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/15 18:00:56 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord);
 
 float deg_to_rad(int angle)
 {
@@ -38,19 +40,22 @@ void	raycasting(t_mlx *mlx)
 	mlx->ray->first_ray_angle = mlx->ply->angle - mlx->ply->fov_radians / 2;
 	mlx->ray->ray_step = (mlx->ply->angle + mlx->ply->fov_radians) / SCREEN_WIDTH;
 
-	printf("init values2: [%d][%d]\n", mlx->ply->coord_x, mlx->ply->coord_y);
+	printf("init values2: [%f][%f]\n", mlx->ply->coord_x, mlx->ply->coord_y);
 	mlx->ray->da = 64 * (mlx->ply->plyr_y + 1) - mlx->ply->coord_x; // x and y, what for coordinate
-	printf("the y index is: %d, the coordinate is: %d\n", mlx->ply->plyr_y, mlx->ply->coord_x);
+	printf("the y index is: %d, the coordinate is: %f\n", mlx->ply->plyr_y, mlx->ply->coord_x);
 	printf("the dx is: %f\n", mlx->ray->da);
 	mlx->ray->db = tan(mlx->ray->first_ray_angle) * mlx->ray->da;
+	printf("the x index is: %d, the coordinate is: %f\n", mlx->ply->plyr_x, mlx->ply->coord_y);
 	printf("the dy is: %f\n", mlx->ray->db);
-	mlx->ray->d_h = mlx->ray->d_h / cos(mlx->ray->first_ray_angle);
+	mlx->ray->d_h = mlx->ray->da / cos(mlx->ray->first_ray_angle);
 	printf("the distance is: %f\n", mlx->ray->d_h);
 
 	float x1;
 	float y1;
 
-	x1 = mlx->ply->plyr_y + 1;
-	y1 = 64 * (mlx->ply->plyr_x + 1) + mlx->ply->coord_y - mlx->ray->d_h;
-	//draw_inter(mlx, x1, y1);
+	x1 = (mlx->ply->plyr_y + 1) * 64;
+	y1 = mlx->ply->coord_y - mlx->ray->db;
+	printf("the new coordinates are: [%f][%f]\n", x1, y1);
+	draw_inter(mlx, x1, y1);
+	minimap_draw_line(mlx, x1, y1);
 }
