@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/10 14:29:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/15 16:35:01 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,15 @@ typedef struct s_player
 {
 	int		plyr_x;
 	int		plyr_y;
+	int		map_i; //player's position map index
+	int		map_j; //player's position map index
 	int		coord_x; //to store player's position in pixels
 	int		coord_y;
 	int		plyr_inside_tile_x;
 	int		plyr_inside_tile_y;
-	int		most_left_angle;
-	int		angle;
-	int		most_right_angle;
+	int		most_left_angle; //FOV
+	int		angle; //player's view central point
+	int		most_right_angle; //FOV
 	float	fov_radians;
 	int		rotation;
 	int		left_or_right;
@@ -88,8 +90,18 @@ typedef struct s_raytracing
 	float			da; //increase by x_axis
 	float			db; //increase by y_axis
 	float			d_h; //distance to intersection;
-	double			first_ray_angle;
+	double			alpha; //angle for calculations;
 	float			ray_step;
+	float			x1; //intersections
+	float			y1;
+	float			dist_vert_i;
+	float			vert_x_wall;
+	float			vert_y_wall;
+	float			dist_hor_i;
+	float			hor_x_wall;
+	float			hor_y_wall;
+	float			wall_x; //intersection with the wall
+	float			wall_y; //intersection with the wall
 	int				sq_unit; //haven't used yet;
 	double			distance_to_wall;
 	int				flag_for_wall;
@@ -123,6 +135,13 @@ void	draw_player (t_mlx *mlx);
 void	draw_walls(t_mlx *mlx);
 void	init(t_mlx *mlx);
 float	deg_to_rad(int angle);
+void	vert_inter(t_mlx *mlx);
+void	first_inter(t_mlx *mlx);
+void	next_vert_i(t_mlx *mlx);
+void	draw_inter(t_mlx *mlx, float x, float y);
+int		check_if_wall_h(t_mlx *mlx, int i, int j);
+float	ft_abs2(float a);
+void	horiz_inter(t_mlx *mlx);
 
 /*Walls funcitons and structs*/
 void	floor_and_ceiling_color(t_mlx *mlx);

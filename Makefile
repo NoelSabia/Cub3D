@@ -16,6 +16,8 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)raycasting/raycasting_2d.c \
 		$(SRCDIR)raycasting/minimap.c \
 		$(SRCDIR)raycasting/minimap_draw.c \
+		$(SRCDIR)raycasting/vert_inter.c \
+		$(SRCDIR)raycasting/horiz_inter.c \
 		$(SRCDIR)walls/floor_ceiling_color.c
 
 OBJDIR := ./obj/
@@ -23,9 +25,12 @@ OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
 CC := cc #-fsanitize=address -g
 
+MLX_LIB		= ./MLX42/build/libmlx42.a
+MLX_PATH	= ./MLX42
+MLX			= -ldl -lglfw -pthread -lm
 MLX_DIR = MLX42
-MLX = $(MLX_DIR)/build/libmlx42.a
-MLX_FLAGS = -L$(MLX_DIR)/build -lmlx42 -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+# MLX = $(MLX_DIR)/build/libmlx42.a
+# MLX_FLAGS = -L$(MLX_DIR)/build -lmlx42 -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 
 .PHONY: all clean fclean re
 
@@ -39,10 +44,19 @@ $(MLX):
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
+	$(CC) $(CFLAGS) -I$(MLX_PATH)/include -c $< -o $@ $(HEADERS)
 
-$(NAME): $(OBJS) libft/libft.a $(MLX)
-	$(CC) $(OBJS) -o $(NAME) -Llibft -lft $(MLX_FLAGS)
+$(NAME): $(MLX_LIB) $(OBJS) libft/libft.a
+	$(CC) $(OBJS) $(MLX_LIB) $(MLX) -o $(NAME) -Llibft -lft
+
+# $(NAME): $(OBJS) libft/libft.a $(MLX)
+# 	$(CC) $(OBJS) -o $(NAME) -Llibft -lft $(MLX_FLAGS)
+
+$(MLX_LIB):
+	git clone https://github.com/codam-coding-college/MLX42.git $(MLX_PATH)
+	mkdir -p $(MLX_PATH)/build
+	cd $(MLX_PATH)/build && cmake ..
+	make -C $(MLX_PATH)/build
 
 clean:
 	@$(MAKE) -C libft clean
@@ -52,7 +66,7 @@ clean:
 fclean: clean
 	@$(MAKE) -C libft fclean
 	@rm -rf $(NAME)
-	@rm -rf $(MLX)
+	@rm -rf $(MLX_PATH)
 
 re: fclean all
 
