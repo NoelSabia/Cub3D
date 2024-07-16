@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/15 16:35:01 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/15 22:14:34 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_raytracing
 	float			db; //increase by y_axis
 	float			d_h; //distance to intersection;
 	double			alpha; //angle for calculations;
+	double			alpha2; //for horiz intersections calculation;
 	float			ray_step;
 	float			x1; //intersections
 	float			y1;
@@ -123,9 +124,7 @@ void	validate_map(t_mlx *mlx);
 void	flood_fill_organizer(t_mlx *mlx);
 void	find_player(t_mlx *mlx);
 char	**map_copy_it(t_mlx *mlx);
-
 int		ft_abs(int num);
-
 void	raycasting(t_mlx *mlx);
 void	minimap_draw(t_mlx *mlx);
 void	put_block(t_mlx *mlx, int i, int j);
@@ -139,9 +138,12 @@ void	vert_inter(t_mlx *mlx);
 void	first_inter(t_mlx *mlx);
 void	next_vert_i(t_mlx *mlx);
 void	draw_inter(t_mlx *mlx, float x, float y);
+int		out_check(t_mlx *mlx);
 int		check_if_wall_h(t_mlx *mlx, int i, int j);
 float	ft_abs2(float a);
 void	horiz_inter(t_mlx *mlx);
+void	first_hor_inter(t_mlx *mlx);
+void	next_hor_i(t_mlx *mlx);
 
 /*Walls funcitons and structs*/
 void	floor_and_ceiling_color(t_mlx *mlx);

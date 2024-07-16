@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/15 16:34:41 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:00:30 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,25 @@ float ft_abs2(float a)
 
 int	check_if_wall_h(t_mlx *mlx, int i, int j)
 {
+	int		i1;
+	int		j1;
+
+	if (i % 64 == 0)
+		i1 = i / 64 - 1;
+	else
+		i1 = i / 64;
+	if (j % 64 == 0)
+		j1 = j / 64 - 1;
+	else
+		j1 = j / 64;
+	printf("check if wall start\n");
 	printf("passed coord: %d, %d\n", i, j);
 
-	printf("the cell: [%d][%d]\n", j / 64, i / 64);
-	printf("the map char: %c\n", mlx->parse->map[j / 64][i / 64]);
-	if (mlx->parse->map[j / 64][i / 64] == '1')
-	{
+	printf("the cell: [%d][%d]\n", j1, i1);
+	printf("the map char: %c\n", mlx->parse->map[j1][i1]);
+	if (mlx->parse->map[j1][i1] == '1')
 		return (1);
-	}
+	printf("check if wall end\n");
 	return (0);
 }
 
@@ -39,6 +50,7 @@ float deg_to_rad(int angle)
 
 void draw_inter(t_mlx *mlx, float x, float y)
 {
+	printf("draw inter\n");
 	//to limit drawing with boundaries of the map
 	mlx_put_pixel(mlx->ray->minimap, x, y, 0x00FF00FF);
 	mlx_put_pixel(mlx->ray->minimap, x + 1, y, 0x00FF00FF);
@@ -65,5 +77,6 @@ void	raycasting(t_mlx *mlx)
 {
 	angles_correction(mlx);
 	vert_inter(mlx);
-	void horiz_inter(t_mlx *mlx);
+
+	horiz_inter(mlx);
 }
