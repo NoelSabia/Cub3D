@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:30:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/15 17:05:55 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:49:33 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void init_values(t_mlx *mlx)
 	mlx->ray->d_h = 0;
 	mlx->ray->dist_hor_i = 0;
 	mlx->ray->dist_vert_i = 0;
-	mlx->ray->ray_step = 0;
+	mlx->ray->ray_step = FOV / SCREEN_WIDTH;
 	mlx->ray->distance_to_wall = 0;
 	mlx->ray->flag_for_wall = 0;
 	mlx->ray->x1 = 0;

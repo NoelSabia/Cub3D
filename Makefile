@@ -18,6 +18,8 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)raycasting/minimap_draw.c \
 		$(SRCDIR)raycasting/vert_inter.c \
 		$(SRCDIR)raycasting/horiz_inter.c \
+		$(SRCDIR)raycasting/spec_inter.c \
+		$(SRCDIR)raycasting/draw_ray.c \
 		$(SRCDIR)walls/floor_ceiling_color.c
 
 OBJDIR := ./obj/

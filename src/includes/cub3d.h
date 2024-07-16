@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/15 22:14:34 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:48:44 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_raytracing
 	float			d_h; //distance to intersection;
 	double			alpha; //angle for calculations;
 	double			alpha2; //for horiz intersections calculation;
-	float			ray_step;
+	int				ray_step;
 	float			x1; //intersections
 	float			y1;
 	float			dist_vert_i;
@@ -139,11 +139,19 @@ void	first_inter(t_mlx *mlx);
 void	next_vert_i(t_mlx *mlx);
 void	draw_inter(t_mlx *mlx, float x, float y);
 int		out_check(t_mlx *mlx);
-int		check_if_wall_h(t_mlx *mlx, int i, int j);
+int		check_if_wall_h(t_mlx *mlx);
+int		check_if_wall_v(t_mlx *mlx);
 float	ft_abs2(float a);
 void	horiz_inter(t_mlx *mlx);
 void	first_hor_inter(t_mlx *mlx);
 void	next_hor_i(t_mlx *mlx);
+void	specific_intersections(t_mlx *mlx);
+void	intersec_270(t_mlx *mlx);
+void	intersec_180(t_mlx *mlx);
+void	intersec_90(t_mlx *mlx);
+void	intersec_zero(t_mlx *mlx);
+void	choose_min_dist(t_mlx *mlx);
+
 
 /*Walls funcitons and structs*/
 void	floor_and_ceiling_color(t_mlx *mlx);

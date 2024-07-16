@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:58:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/16 12:03:45 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:41:48 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ void first_inter(t_mlx *mlx)
 	mlx->ray->dist_vert_i += mlx->ray->d_h;
 	if (out_check(mlx) == 1)
 		return ;
-	draw_inter(mlx, mlx->ray->x1, mlx->ray->y1);
+	//draw_inter(mlx, mlx->ray->x1, mlx->ray->y1);
 }
 
 void next_vert_i(t_mlx *mlx)
 {
 	printf("next inter\n");
-	mlx->ray->da = 64;
-	mlx->ray->db = ft_abs2(tan(mlx->ray->alpha) * mlx->ray->da);
-	printf("next db: %f\n", mlx->ray->db);
-	mlx->ray->d_h = ft_abs2(mlx->ray->da / cos(mlx->ray->alpha)); //abs value
+	// mlx->ray->da = 64;
+	// mlx->ray->db = ft_abs2(tan(mlx->ray->alpha) * mlx->ray->da);
+	// printf("next db: %f\n", mlx->ray->db);
+	// mlx->ray->d_h = ft_abs2(mlx->ray->da / cos(mlx->ray->alpha)); //abs value
 	mlx->ray->dist_vert_i += mlx->ray->d_h;
 	if (mlx->ray->alpha < M_PI / 2 || mlx->ray->alpha > 3 * M_PI / 2)
 		mlx->ray->x1 += 64;
@@ -79,18 +79,34 @@ void next_vert_i(t_mlx *mlx)
 	printf("new coordinates: [%f][%f]\n", mlx->ray->x1, mlx->ray->y1);
 	printf("next inter end\n");
 }
+int check_if_wall_v(t_mlx *mlx)
+{
+	int		i1;
+	int		j1;
+
+	if (mlx->ray->alpha > M_PI / 2 && mlx->ray->alpha < M_PI * 3 / 2)
+		j1 = mlx->ray->x1 / 64 - 1;
+	else
+		j1 = mlx->ray->x1 / 64;
+	i1 = mlx->ray->y1 / 64;
+	//printf("map [%d][%d]\n", j1, i1);
+	if (mlx->parse->map[i1][j1] == '1')
+		return (1);
+	return (0);
+}
 
 void vert_inter(t_mlx *mlx)
 {
 	printf("---vert inter starts---\n");
 
-	mlx->ray->alpha = deg_to_rad(300); //DELETE
 	first_inter(mlx);
+	mlx->ray->da = 64;
+	mlx->ray->db = ft_abs2(tan(mlx->ray->alpha) * mlx->ray->da);
+	mlx->ray->d_h = ft_abs2(mlx->ray->da / cos(mlx->ray->alpha)); //abs value
 	while (1)
 	{
-		if (check_if_wall_h(mlx, mlx->ray->x1, mlx->ray->y1) == 1)
+		if (check_if_wall_v(mlx) == 1)
 		{
-			printf("the wall here\n");
 			mlx->ray->vert_x_wall = mlx->ray->x1;
 			mlx->ray->vert_y_wall = mlx->ray->y1;
 			return;
@@ -98,6 +114,6 @@ void vert_inter(t_mlx *mlx)
 			next_vert_i(mlx);
 			if (out_check(mlx) == 1)
 				return ;
-			draw_inter(mlx, mlx->ray->x1, mlx->ray->y1);
+			//draw_inter(mlx, mlx->ray->x1, mlx->ray->y1);
 	}
 }
