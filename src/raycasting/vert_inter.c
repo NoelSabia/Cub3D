@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:58:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/16 20:41:48 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:23:25 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 
 int out_check(t_mlx *mlx)
 {
-	printf("coordinates: x1: %f, y: %f\n", mlx->ray->x1, mlx->ray->y1);
+	printf("out check\n");
+	printf("coordinates: x1: %f, y1: %f, width %d\n", mlx->ray->x1, mlx->ray->y1, mlx->parse->rows * 64);
 	if (mlx->ray->x1 < 0 || mlx->ray->x1 > mlx->parse->rows * 64)
 	{
+		printf("SEGFAULT\n");
 		printf("rows: %d, upper x1 limit: %d\n", mlx->parse->cols, mlx->parse->cols * 64);
 		return (1);
 	}
@@ -39,18 +41,21 @@ int out_check(t_mlx *mlx)
 
 void first_inter(t_mlx *mlx)
 {
-	if ((mlx->ray->alpha < M_PI / 2 && mlx->ray->alpha > 0) \
-		|| (mlx->ray->alpha < 3 * M_PI / 2 && mlx->ray->alpha < 2 * M_PI))
+	printf("first vert inter\n");
+	if ((mlx->ply->most_right_angle < 90 && mlx->ply->most_right_angle > 0) \
+		|| (mlx->ply->most_right_angle > 270 && mlx->ply->most_right_angle < 360))
 		mlx->ray->da = 64 - fmod(mlx->ply->coord_x, 64);
 	else
 		mlx->ray->da = fmod(mlx->ply->coord_x, 64);
-	mlx->ray->db = ft_abs2(tan(mlx->ray->alpha) * mlx->ray->da);
-	mlx->ray->d_h = ft_abs2(mlx->ray->da / cos(mlx->ray->alpha)); //abs value
-	if (mlx->ray->alpha < M_PI / 2 || mlx->ray->alpha > 3 * M_PI / 2)
+	printf("da is: %f\n", mlx->ray->da);
+	mlx->ray->db = fabs(tan(mlx->ray->alpha) * mlx->ray->da);
+	printf("db is: %f\n", mlx->ray->db);
+	mlx->ray->d_h = fabs(mlx->ray->da / cos(mlx->ray->alpha)); //abs value
+	if (mlx->ply->most_right_angle < 90 || mlx->ply->most_right_angle > 270)
 		mlx->ray->x1 = (mlx->ply->map_i + 1) * 64;
 	else
 		mlx->ray->x1 = 64 * mlx->ply->map_i;
-	if (mlx->ray->alpha < M_PI)
+	if (mlx->ply->most_right_angle < 180)
 		mlx->ray->y1 = mlx->ply->coord_y - mlx->ray->db;
 	else
 		mlx->ray->y1 = mlx->ply->coord_y + mlx->ray->db;
@@ -89,8 +94,8 @@ int check_if_wall_v(t_mlx *mlx)
 	else
 		j1 = mlx->ray->x1 / 64;
 	i1 = mlx->ray->y1 / 64;
-	//printf("map [%d][%d]\n", j1, i1);
-	if (mlx->parse->map[i1][j1] == '1')
+	printf("map [%d][%d]\n", j1, i1);
+	if (i1 > 0 && j1 > 0 && mlx->parse->map[i1][j1] == '1') //should it be like that, why negative values passed
 		return (1);
 	return (0);
 }
@@ -98,7 +103,6 @@ int check_if_wall_v(t_mlx *mlx)
 void vert_inter(t_mlx *mlx)
 {
 	printf("---vert inter starts---\n");
-
 	first_inter(mlx);
 	mlx->ray->da = 64;
 	mlx->ray->db = ft_abs2(tan(mlx->ray->alpha) * mlx->ray->da);

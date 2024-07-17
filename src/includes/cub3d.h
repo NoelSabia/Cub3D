@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/16 20:48:44 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/17 09:46:45 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void	intersec_180(t_mlx *mlx);
 void	intersec_90(t_mlx *mlx);
 void	intersec_zero(t_mlx *mlx);
 void	choose_min_dist(t_mlx *mlx);
+void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord);
 
 
 /*Walls funcitons and structs*/

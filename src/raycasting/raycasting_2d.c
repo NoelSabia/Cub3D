@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/16 22:06:19 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:21:28 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
     int e2;
 	int width;
 	int height;
+	int that_x;
+	int that_y;
 
+	that_x = mlx->ply->coord_x;
+	that_y = mlx->ply->coord_y;
 	width = 64*(mlx->parse->rows + 1);
 	height = 64*(mlx->parse->cols + 1);
     dx = ft_abs((int)x_coord - mlx->ply->coord_x);
@@ -79,67 +83,68 @@ void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
     err = dx - dy;
     while (1)
 	{
-		printf("***draw line check***\n");
-		if (mlx->ply->coord_x >= 0 && mlx->ply->coord_x < width
-            && mlx->ply->coord_y >= 0 && mlx->ply->coord_y < height) //corrected width and height
-			mlx_put_pixel(mlx->ray->minimap, mlx->ply->coord_x, mlx->ply->coord_y, 0x00FF00FF); //corrected img of minimap
-		if (mlx->ply->coord_x == (int)x_coord
-            && mlx->ply->coord_y == (int)y_coord)
+		if (that_x >= 0 && that_x < width
+            && that_y >= 0 && that_y < height) //corrected width and height
+			mlx_put_pixel(mlx->ray->minimap, that_x, that_y, 0x00FF00FF); //corrected img of minimap
+		if (that_x == (int)x_coord
+            && that_y == (int)y_coord)
 			break;
         e2 = err * 2;
         if (e2 > -dy)
 		{
             err -= dy;
-            mlx->ply->coord_x += sx;
+            that_x += sx;
         }
         if (e2 < dx)
 		{
             err += dx;
-            mlx->ply->coord_y -= sy;
+            that_y -= sy;
         }
     }
 }
 
 void	raycasting(t_mlx *mlx)
 {
-	//int		i;
+	int		i;
 
-	mlx->ply->most_right_angle = 70;
-	mlx->ray->alpha = deg_to_rad(70); //DELETE
-	//angles_update(mlx); //at some point when the player changes the angle
+	mlx->ply->angle = 100;
+	//mlx->ray->alpha = deg_to_rad(120); //DELETE
+	angles_update(mlx); //at some point when the player changes the angle
 	angles_correction(mlx);
 
-	// i = 0;
-	// while (i < 5)
-	// {
-	// 	mlx->ray->alpha = deg_to_rad(mlx->ply->most_right_angle);
-	// 	if (mlx->ply->most_right_angle == 0 || mlx->ply->most_right_angle == 360 \
-	// 	|| mlx->ply->most_right_angle == 90 || mlx->ply->most_right_angle  == 180 \
-	// 	|| mlx->ply->most_right_angle == 270)
-	// 		specific_intersections(mlx);
-	// 	else
-	// 	{
-	// 		vert_inter(mlx);
-	// 		horiz_inter(mlx);
-	// 		choose_min_dist(mlx);
-	// 	}
-	// 	//draw the line function
-	// 	mlx->ply->most_right_angle += 5;
-	// 	i++;
-	// }
-
-	if (mlx->ply->most_right_angle == 0 || mlx->ply->most_right_angle == 360 \
-	|| mlx->ply->most_right_angle == 90 || mlx->ply->most_right_angle  == 180 \
-	|| mlx->ply->most_right_angle == 270)
-		specific_intersections(mlx);
-	else
+	i = 0;
+	while (i < 10)
 	{
-		vert_inter(mlx);
-		horiz_inter(mlx);
-		choose_min_dist(mlx);
+		printf("----i is: %d-----\n", i);
+		printf("the angle is: %d\n", mlx->ply->most_right_angle);
+		mlx->ray->alpha = deg_to_rad(mlx->ply->most_right_angle);
+		if (mlx->ply->most_right_angle == 0 || mlx->ply->most_right_angle == 360 \
+		|| mlx->ply->most_right_angle == 90 || mlx->ply->most_right_angle  == 180 \
+		|| mlx->ply->most_right_angle == 270)
+			specific_intersections(mlx);
+		else
+		{
+			vert_inter(mlx);
+			horiz_inter(mlx);
+			choose_min_dist(mlx);
+		}
+		minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
+		mlx->ply->most_right_angle += 1;
+		i++;
 	}
-	printf("coord*** [%f][%f]\n", mlx->ray->wall_x, mlx->ray->wall_y);
-	printf("player coord: [%d][%d]\n", mlx->ply->coord_x, mlx->ply->coord_y);
-	minimap_draw_line(mlx, mlx->ray->wall_y, mlx->ray->wall_x);
 
+	// if (mlx->ply->most_right_angle == 0 || mlx->ply->most_right_angle == 360 \
+	// || mlx->ply->most_right_angle == 90 || mlx->ply->most_right_angle  == 180 \
+	// || mlx->ply->most_right_angle == 270)
+	// 	specific_intersections(mlx);
+	// else
+	// {
+	// 	vert_inter(mlx);
+	// 	horiz_inter(mlx);
+	// 	choose_min_dist(mlx);
+	// }
+	// printf("coord*** [%f][%f]\n", mlx->ray->wall_x, mlx->ray->wall_y);
+	// printf("player coord: [%d][%d]\n", mlx->ply->coord_x, mlx->ply->coord_y);
+
+	// minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
 }
