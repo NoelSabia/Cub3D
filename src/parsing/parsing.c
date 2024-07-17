@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 02:31:36 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/10 14:27:54 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/17 10:41:40 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	player_direction(t_mlx *mlx)
 	else if (c == 'S')
 		mlx->ply->angle = 270;
 	else
-		clean_exit("Player spawn is not W N E or S!");
+		clean_exit("Player spawn is not W N E or S!\n");
 	mlx->ply->most_left_angle = mlx->ply->angle - 30;
 	mlx->ply->most_right_angle = mlx->ply->angle + 30;
 }
@@ -124,7 +124,14 @@ void	parsing(t_mlx *mlx, char *filename)
 {
 	char	*output;
 	char	*clean_output;
+	char	*cub;
 
+	cub = ft_strnstr(filename, ".cub", ft_strlen(filename));
+	while (*cub)
+		if (!ft_strchr(".cub", *cub++))
+			clean_exit("Please only .cub at the end!\n");
+	if (!ft_strnstr(filename, ".cub", ft_strlen(filename)))
+		clean_exit("Please submit a .cub file!\n");
 	output = read_into_input(filename);
 	clean_output = replace_tab(output, '	', "    ");
 	put_in_2d_array(mlx , clean_output);
