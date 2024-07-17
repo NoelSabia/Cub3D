@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 13:41:50 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/01 16:27:56 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/17 17:46:03 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 void    check_string(char *str)
 {
     int i;
+    int check_commas;
 
+    i = -1;
+    check_commas = 0;
+    while (str[++i])
+    {
+        if (str[i] == ',')
+            check_commas++;
+    }
+    if (!(check_commas == 2))
+        clean_exit("Please only three numbers seperated with two commas!\n");
     i = 0;
     while (str[i] && ft_strchr(" 	,0123456789", str[i]))
 		i++;
 	if (!ft_strchr(" 	,0123456789\n\0", str[i]))
-		clean_exit("Unallowed chars in F or C detected!");
+		clean_exit("Unallowed chars in F or C detected!\n");
 }
 
 char    *char_to_str(char c)
