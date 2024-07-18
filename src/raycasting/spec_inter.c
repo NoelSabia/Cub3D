@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:31:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/17 09:41:05 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:01:52 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,7 @@ void	specific_intersections(t_mlx *mlx)
 	else if (mlx->ply->most_right_angle == 270)
 		intersec_270(mlx);
 	minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
+	reinit(mlx);
+	
 	printf("coordinates of inter: [%f][%f], distance: %f\n", mlx->ray->wall_x, mlx->ray->wall_y, mlx->ray->distance_to_wall);
 }

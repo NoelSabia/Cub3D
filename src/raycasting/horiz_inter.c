@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:35:26 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/16 20:42:02 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:35:07 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ int	check_if_wall_h(t_mlx *mlx)
 	else
 		i1 = mlx->ray->y1 / 64;
 	j1 = mlx->ray->x1 / 64;
+	printf("CHECK: i1: %d, rows: %d\n", i1, mlx->parse->rows);
+	if (i1 == mlx->parse->cols || j1 == mlx->parse->rows)
+		return(1);
 	printf("the cell: [%d][%d]\n", i1, j1);
 	printf("the map char: %c\n", mlx->parse->map[i1][j1]);
+	printf("rows: %d, cols: %d\n", mlx->parse->rows, mlx->parse->cols);
 	if (mlx->parse->map[i1][j1] == '1')
 		return (1);
 	printf("check if wall end\n");
@@ -83,6 +87,8 @@ void horiz_inter(t_mlx *mlx)
 	mlx->ray->d_h = ft_abs(mlx->ray->db / sin(mlx->ray->alpha));
 	while (1)
 	{
+		if (out_check(mlx) == 1)
+				return ;
 		if (check_if_wall_h(mlx) == 1)
 		{
 			mlx->ray->hor_x_wall = mlx->ray->x1;
@@ -90,8 +96,8 @@ void horiz_inter(t_mlx *mlx)
 			return;
 		}
 			next_hor_i(mlx);
-			if (out_check(mlx) == 1)
-				return ;
+			// if (out_check(mlx) == 1)
+			// 	return ;
 			//draw_inter(mlx, mlx->ray->x1, mlx->ray->y1);
 	}
 }

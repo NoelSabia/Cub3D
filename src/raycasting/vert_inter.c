@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:58:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/17 19:23:25 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:36:32 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int out_check(t_mlx *mlx)
 	printf("coordinates: x1: %f, y1: %f, width %d\n", mlx->ray->x1, mlx->ray->y1, mlx->parse->rows * 64);
 	if (mlx->ray->x1 < 0 || mlx->ray->x1 > mlx->parse->rows * 64)
 	{
-		printf("SEGFAULT\n");
 		printf("rows: %d, upper x1 limit: %d\n", mlx->parse->cols, mlx->parse->cols * 64);
 		return (1);
 	}
@@ -94,7 +93,9 @@ int check_if_wall_v(t_mlx *mlx)
 	else
 		j1 = mlx->ray->x1 / 64;
 	i1 = mlx->ray->y1 / 64;
-	printf("map [%d][%d]\n", j1, i1);
+	if (j1 == mlx->parse->cols || i1 == mlx->parse->rows)
+		return(1);
+	printf("map [%d][%d], map char %c\n", j1, i1, mlx->parse->map[i1][j1]);
 	if (i1 > 0 && j1 > 0 && mlx->parse->map[i1][j1] == '1') //should it be like that, why negative values passed
 		return (1);
 	return (0);
@@ -109,6 +110,8 @@ void vert_inter(t_mlx *mlx)
 	mlx->ray->d_h = ft_abs2(mlx->ray->da / cos(mlx->ray->alpha)); //abs value
 	while (1)
 	{
+		if (out_check(mlx) == 1)
+				return ;
 		if (check_if_wall_v(mlx) == 1)
 		{
 			mlx->ray->vert_x_wall = mlx->ray->x1;
@@ -116,8 +119,8 @@ void vert_inter(t_mlx *mlx)
 			return;
 		}
 			next_vert_i(mlx);
-			if (out_check(mlx) == 1)
-				return ;
+			// if (out_check(mlx) == 1)
+			// 	return ;
 			//draw_inter(mlx, mlx->ray->x1, mlx->ray->y1);
 	}
 }

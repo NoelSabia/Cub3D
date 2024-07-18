@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/17 19:21:28 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:38:02 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,27 @@ void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
         }
     }
 }
+void reinit(t_mlx *mlx)
+{
+	mlx->ray->da = 0;
+	mlx->ray->db = 0;
+	mlx->ray->d_h = 0;
+	mlx->ray->x1 = mlx->ply->coord_x;
+	mlx->ray->y1 = mlx->ply->coord_y;
+
+}
 
 void	raycasting(t_mlx *mlx)
 {
 	int		i;
 
-	mlx->ply->angle = 100;
+	mlx->ply->angle = 330;
 	//mlx->ray->alpha = deg_to_rad(120); //DELETE
 	angles_update(mlx); //at some point when the player changes the angle
 	angles_correction(mlx);
 
 	i = 0;
-	while (i < 10)
+	while (i < 60)
 	{
 		printf("----i is: %d-----\n", i);
 		printf("the angle is: %d\n", mlx->ply->most_right_angle);
@@ -125,8 +134,12 @@ void	raycasting(t_mlx *mlx)
 		else
 		{
 			vert_inter(mlx);
+			reinit(mlx);
 			horiz_inter(mlx);
 			choose_min_dist(mlx);
+			reinit(mlx);
+			mlx->ray->dist_vert_i = 0;
+			mlx->ray->dist_hor_i = 0;
 		}
 		minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
 		mlx->ply->most_right_angle += 1;
