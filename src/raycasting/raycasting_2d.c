@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/18 15:38:02 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:11:47 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,13 @@ void	raycasting(t_mlx *mlx)
 {
 	int		i;
 
-	mlx->ply->angle = 330;
+	//mlx->ply->angle = 120;
 	//mlx->ray->alpha = deg_to_rad(120); //DELETE
 	angles_update(mlx); //at some point when the player changes the angle
 	angles_correction(mlx);
 
 	i = 0;
-	while (i < 60)
+	while (i < 20)
 	{
 		printf("----i is: %d-----\n", i);
 		printf("the angle is: %d\n", mlx->ply->most_right_angle);
@@ -145,19 +145,4 @@ void	raycasting(t_mlx *mlx)
 		mlx->ply->most_right_angle += 1;
 		i++;
 	}
-
-	// if (mlx->ply->most_right_angle == 0 || mlx->ply->most_right_angle == 360 \
-	// || mlx->ply->most_right_angle == 90 || mlx->ply->most_right_angle  == 180 \
-	// || mlx->ply->most_right_angle == 270)
-	// 	specific_intersections(mlx);
-	// else
-	// {
-	// 	vert_inter(mlx);
-	// 	horiz_inter(mlx);
-	// 	choose_min_dist(mlx);
-	// }
-	// printf("coord*** [%f][%f]\n", mlx->ray->wall_x, mlx->ray->wall_y);
-	// printf("player coord: [%d][%d]\n", mlx->ply->coord_x, mlx->ply->coord_y);
-
-	// minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
 }
