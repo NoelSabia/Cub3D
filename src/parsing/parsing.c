@@ -124,7 +124,14 @@ void	parsing(t_mlx *mlx, char *filename)
 {
 	char	*output;
 	char	*clean_output;
+	char	*cub;
 
+	cub = ft_strnstr(filename, ".cub", ft_strlen(filename));
+	while (*cub)
+		if (!ft_strchr(".cub", *cub++))
+			clean_exit("Please only .cub at the end!\n");
+	if (!ft_strnstr(filename, ".cub", ft_strlen(filename)))
+		clean_exit("Please submit a .cub file!\n");
 	output = read_into_input(filename);
 	clean_output = replace_tab(output, '	', "    ");
 	put_in_2d_array(mlx , clean_output);
