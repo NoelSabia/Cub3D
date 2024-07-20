@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:30:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/11 12:30:17 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/16 20:49:33 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,22 @@ void draw_walls(t_mlx *mlx)
 }
 void init_values(t_mlx *mlx)
 {
-	mlx->ply->coord_x = 0;
-	mlx->ply->coord_y = 0;
-	mlx->ply->coord_x = mlx->ply->plyr_y * 64 + 32;
-	mlx->ply->coord_y = mlx->ply->plyr_x * 64 + 32;
-	printf("->%d\n", mlx->ply->coord_y);
-
-	mlx->ply->angle = 0;
+	mlx->ply->map_i = mlx->ply->plyr_y; //they are like coordinates, i means x_axis
+	mlx->ply->map_j = mlx->ply->plyr_x; // y_axis, the row index
+	mlx->ply->coord_x = mlx->ply->map_i * 64 + 32;
+	mlx->ply->coord_y = mlx->ply->map_j * 64 + 32;
+	mlx->ray->alpha = deg_to_rad(mlx->ply->most_right_angle);
 	mlx->ply->fov_radians = 0;
 	mlx->ray->da = 0;
 	mlx->ray->db = 0;
 	mlx->ray->d_h = 0;
-	mlx->ray->first_ray_angle = 0;
-	mlx->ray->ray_step = 0;
+	mlx->ray->dist_hor_i = 0;
+	mlx->ray->dist_vert_i = 0;
+	mlx->ray->ray_step = FOV / SCREEN_WIDTH;
 	mlx->ray->distance_to_wall = 0;
 	mlx->ray->flag_for_wall = 0;
+	mlx->ray->x1 = 0;
+	mlx->ray->y1 = 0;
 }
 
 void	minimap_draw(t_mlx *mlx)
