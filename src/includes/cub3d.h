@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/18 15:02:49 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:12:05 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define SCREEN_HEIGHT 1080
 # define TILE_SIZE 50
 # define FOV 60
-# define ROTATION_SPEED 0.045
-# define PLAYER_SPEED 10
+# define ROTATION_SPEED 2
+# define PLAYER_SPEED 1
 
 /*Parsing functions and structs*/
 typedef struct s_parsing
