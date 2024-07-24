@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/24 16:25:35 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:57:29 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,16 +122,16 @@ void ray_angle_correction(t_mlx *mlx)
 
 void	raycasting(t_mlx *mlx)
 {
-	printf("\n*****this updated raycasting****\n");
+	// printf("\n*****this updated raycasting****\n");
 	int		i;
 
-	mlx->ply->angle = 90;
+	// mlx->ply->angle = 90;
 	//mlx->ray->alpha = deg_to_rad(60); //DELETE
-	angles_update(mlx); //at some point when the player changes the angle
+	// angles_update(mlx); //at some point when the player changes the angle
 	// angles_correction(mlx);
 
 	i = 0;
-	while (i < 360)
+	while (i < 10)
 	{
 		// printf("----i is: %d-----\n", i);
 		// printf("the angle is: %d\n", mlx->ply->most_right_angle);
@@ -151,7 +151,7 @@ void	raycasting(t_mlx *mlx)
 			mlx->ray->dist_hor_i = 0;
 		}
 		minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
-		mlx->ply->most_right_angle += 1;
+		// mlx->ply->most_right_angle += 1;
 		ray_angle_correction(mlx);
 		i++;
 	}

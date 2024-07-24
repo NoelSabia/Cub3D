@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 17:15:49 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/23 19:05:17 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/24 16:54:27 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void    floor_and_ceiling_color_display(t_mlx *mlx)
 void game_loop(void *mlx_copy)
 {
     t_mlx *mlx;
+    static int i;
 
     mlx = mlx_copy;
     // mlx_delete_image(mlx->mlx_p, mlx->img);
@@ -45,7 +46,9 @@ void game_loop(void *mlx_copy)
     // raycasting(mlx);
     mlx->ray->minimap = mlx_new_image(mlx->mlx_p, 64*(mlx->parse->rows + 1), 64*(mlx->parse->cols + 1));
     mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
-    // minimap_draw(mlx);
+    if (!i)
+        minimap_draw(mlx);
+    i++;
 }
 
 void	init(t_mlx *mlx)

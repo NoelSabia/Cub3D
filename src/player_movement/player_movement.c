@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:10:10 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/23 19:02:37 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/24 16:51:08 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,25 @@ void	walk_and_look_around(mlx_key_data_t keydata, t_mlx *mlx)
 {
 	(void)keydata;
 	if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_W))
+	{
 		mlx->ply->coord_y -= PLAYER_SPEED;
+	    minimap_draw(mlx);
+	}
 	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_S))
+	{
 		mlx->ply->coord_y += PLAYER_SPEED;
+	    minimap_draw(mlx);
+	}
 	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_D))
+	{
 		mlx->ply->coord_x += PLAYER_SPEED;
+	    minimap_draw(mlx);
+	}
 	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_A))
+	{
 		mlx->ply->coord_x -= PLAYER_SPEED;
+	    minimap_draw(mlx);
+	}
 	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_LEFT))
 	{
 		if (mlx->ply->angle + ROTATION_SPEED == 360 + ROTATION_SPEED)
@@ -46,6 +58,7 @@ void	walk_and_look_around(mlx_key_data_t keydata, t_mlx *mlx)
 			mlx->ply->most_right_angle = 0 + ROTATION_SPEED;
 		else
 			mlx->ply->most_right_angle += ROTATION_SPEED;
+		minimap_draw(mlx);
 	}
 	else if (mlx_is_key_down(mlx->mlx_p, MLX_KEY_RIGHT))
 	{
@@ -61,6 +74,7 @@ void	walk_and_look_around(mlx_key_data_t keydata, t_mlx *mlx)
 			mlx->ply->most_right_angle = 360 - ROTATION_SPEED;
 		else
 			mlx->ply->most_right_angle -= ROTATION_SPEED;
+		minimap_draw(mlx);
 	}
 }
 
