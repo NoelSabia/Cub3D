@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   vert_inter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:58:45 by oemelyan          #+#    #+#             */
 /*   Updated: 2024/07/24 16:06:04 by oemelyan         ###   ########.fr       */
@@ -30,7 +30,7 @@ int out_check(t_mlx *mlx)
 	//printf("coordinates: x1: %f, y1: %f, width %d\n", mlx->ray->x1, mlx->ray->y1, mlx->parse->rows * 64);
 	if (mlx->ray->x1 < 0 || mlx->ray->x1 > mlx->parse->rows * 64)
 	{
-		printf("rows: %d, upper x1 limit: %d\n", mlx->parse->cols, mlx->parse->cols * 64);
+		// printf("rows: %d, upper x1 limit: %d\n", mlx->parse->cols, mlx->parse->cols * 64);
 		return (1);
 	}
 	else if (mlx->ray->y1 < 0 || mlx->ray->y1 > mlx->parse->cols * 64)
@@ -53,9 +53,9 @@ void first_inter(t_mlx *mlx)
 		mlx->ray->da = 64 - fmod(mlx->ply->coord_x, 64);
 	else
 		mlx->ray->da = fmod(mlx->ply->coord_x, 64);
-	printf("da is: %f\n", mlx->ray->da);
+	// printf("da is: %f\n", mlx->ray->da);
 	mlx->ray->db = fabs(tan(mlx->ray->alpha) * mlx->ray->da);
-	printf("db is: %f\n", mlx->ray->db);
+	// printf("db is: %f\n", mlx->ray->db);
 	mlx->ray->d_h = fabs(mlx->ray->da / cos(mlx->ray->alpha)); //abs value
 	printf("dh is: %f\n", mlx->ray->d_h);
 	if (mlx->ply->most_right_angle < 90 || mlx->ply->most_right_angle > 270)
@@ -107,7 +107,7 @@ int check_if_wall_v(t_mlx *mlx)
 	i1 = mlx->ray->y1 / 64;
 	if (j1 == mlx->parse->cols || i1 == mlx->parse->rows)
 		return(1);
-	printf("map [%d][%d], map char %c\n", j1, i1, mlx->parse->map[i1][j1]);
+	// printf("map [%d][%d], map char %c\n", j1, i1, mlx->parse->map[i1][j1]);
 	if (i1 > 0 && j1 > 0 && mlx->parse->map[i1][j1] == '1') //should it be like that, why negative values passed
 	{
 		printf("yes, wall\n");

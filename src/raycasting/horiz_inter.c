@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   horiz_inter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:35:26 by oemelyan          #+#    #+#             */
 /*   Updated: 2024/07/24 16:05:26 by oemelyan         ###   ########.fr       */
@@ -75,7 +75,7 @@ int	check_if_wall_h(t_mlx *mlx)
 	printf("\n---check if wall start---\n\n");
 	int		i1;
 	int		j1;
-
+  
 	if (mlx->ray->alpha > 0 && mlx->ray->alpha < M_PI)
 		i1 = mlx->ray->y1 / 64 - 1;
 	else

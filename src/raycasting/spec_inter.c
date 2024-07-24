@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spec_inter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:31:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/18 15:01:52 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:59:50 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void intersec_270(t_mlx *mlx)
 
 void	specific_intersections(t_mlx *mlx)
 {
-	printf("--specific intersection--\n");
+	// printf("--specific intersection--\n");
 	if (mlx->ply->most_right_angle == 0 || mlx->ply->most_right_angle == 360)
 		intersec_zero(mlx);
 	else if (mlx->ply->most_right_angle == 90)
@@ -131,6 +131,5 @@ void	specific_intersections(t_mlx *mlx)
 		intersec_270(mlx);
 	minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
 	reinit(mlx);
-	
-	printf("coordinates of inter: [%f][%f], distance: %f\n", mlx->ray->wall_x, mlx->ray->wall_y, mlx->ray->distance_to_wall);
+	// printf("coordinates of inter: [%f][%f], distance: %f\n", mlx->ray->wall_x, mlx->ray->wall_y, mlx->ray->distance_to_wall);
 }

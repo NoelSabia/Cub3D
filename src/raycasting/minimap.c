@@ -14,7 +14,6 @@
 
 void draw_player (t_mlx *mlx)
 {
-	//printf("draw player\n");
 	mlx_put_pixel(mlx->ray->minimap, mlx->ply->coord_x, mlx->ply->coord_y, 0x00FF00FF);
 	mlx_put_pixel(mlx->ray->minimap, mlx->ply->coord_x + 1, mlx->ply->coord_y, 0x00FF00FF);
 	mlx_put_pixel(mlx->ray->minimap, mlx->ply->coord_x + 2, mlx->ply->coord_y, 0x00FF00FF);
@@ -28,7 +27,6 @@ void draw_player (t_mlx *mlx)
 
 void draw_walls(t_mlx *mlx)
 {
-	// printf("draw walls\n");
 	int		i;
 	int		j;
 
@@ -69,7 +67,9 @@ void init_values(t_mlx *mlx)
 
 void	minimap_draw(t_mlx *mlx)
 {
-	init_values(mlx);
+	// printf("x_pos: %d\n", mlx->ply->coord_x);
+	// printf("y_pos: %d\n", mlx->ply->coord_y);
+	// init_values(mlx);
 	draw_walls(mlx);
 	draw_vert(mlx);
 	draw_horiz(mlx);
