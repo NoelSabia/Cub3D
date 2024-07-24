@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/18 16:11:47 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:25:35 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ float deg_to_rad(int angle)
 
 void draw_inter(t_mlx *mlx, float x, float y)
 {
-	printf("draw inter\n");
+	printf("\n\ndraw inter\n");
+	printf("coordinates passed: %f, %f\n", x, y);
 	//to limit drawing with boundaries of the map
 	mlx_put_pixel(mlx->ray->minimap, x, y, 0x00FF00FF);
 	mlx_put_pixel(mlx->ray->minimap, x + 1, y, 0x00FF00FF);
@@ -111,18 +112,24 @@ void reinit(t_mlx *mlx)
 	mlx->ray->y1 = mlx->ply->coord_y;
 
 }
+void ray_angle_correction(t_mlx *mlx)
+{
+	if (mlx->ply->most_right_angle > 360)
+		mlx->ply->most_right_angle -= 360;
+}
 
 void	raycasting(t_mlx *mlx)
 {
+	printf("\n*****this updated raycasting****\n");
 	int		i;
 
-	//mlx->ply->angle = 120;
-	//mlx->ray->alpha = deg_to_rad(120); //DELETE
+	mlx->ply->angle = 90;
+	//mlx->ray->alpha = deg_to_rad(60); //DELETE
 	angles_update(mlx); //at some point when the player changes the angle
 	angles_correction(mlx);
 
 	i = 0;
-	while (i < 20)
+	while (i < 360)
 	{
 		printf("----i is: %d-----\n", i);
 		printf("the angle is: %d\n", mlx->ply->most_right_angle);
@@ -143,6 +150,7 @@ void	raycasting(t_mlx *mlx)
 		}
 		minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
 		mlx->ply->most_right_angle += 1;
+		ray_angle_correction(mlx);
 		i++;
 	}
 }
