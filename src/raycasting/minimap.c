@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:30:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/07/22 17:36:53 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/07/24 13:30:56 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void init_values(t_mlx *mlx)
 {
 	mlx->ply->map_i = mlx->ply->plyr_y; //they are like coordinates, i means x_axis
 	mlx->ply->map_j = mlx->ply->plyr_x; // y_axis, the row index
-	mlx->ply->coord_x = mlx->ply->map_i * 64 + 32;
-	mlx->ply->coord_y = mlx->ply->map_j * 64 + 32;
+	mlx->ply->coord_x = mlx->ply->map_i * 64 + 32 + 15; //DELETE +10
+	mlx->ply->coord_y = mlx->ply->map_j * 64 + 32 + 10; //DELETE +10
 	mlx->ray->alpha = deg_to_rad(mlx->ply->most_right_angle);
 	mlx->ply->fov_radians = 0;
 	mlx->ray->da = 0;
