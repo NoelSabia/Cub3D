@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:08:19 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/08/09 11:54:33 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:16:59 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void draw_wall(t_mlx *mlx, int *step)
 {
+	printf("--draw wall--\n");
 	int		start;
 
 	start = mlx->ray->top_wall_y;
@@ -22,12 +23,15 @@ void draw_wall(t_mlx *mlx, int *step)
 	else if (mlx->ray->bottom_wall_y > SCREEN_HEIGHT - 1)
 		mlx->ray->bottom_wall_y = SCREEN_HEIGHT - 1;
 
+
+
 	while(start <= mlx->ray->bottom_wall_y)
 	{
 		printf("put pixel coord: [%d][%d]\n", *step, start);
 		mlx_put_pixel(mlx->img, *step, start, 0x00FF00FF);
 		start++;
 	}
+	printf("--draw wall ends--\n");
 	return ;
 }
 

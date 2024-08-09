@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/09 11:53:22 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:20:12 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void raycasting(t_mlx *mlx)
 
     abr = ((float)FOV / SCREEN_WIDTH);
 	printf("abr is: %f\n", abr);
-	mlx->ply->angle = 90;
+	mlx->ply->angle = 360;
 	angles_update(mlx); //to set most right angle
 
 	step = 0;
