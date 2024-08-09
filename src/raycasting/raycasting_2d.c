@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/09 14:20:12 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:04:35 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,22 +111,32 @@ void raycasting(t_mlx *mlx)
 
     abr = ((float)FOV / SCREEN_WIDTH);
 	printf("abr is: %f\n", abr);
-	mlx->ply->angle = 360;
-	angles_update(mlx); //to set most right angle
+	// mlx->ply->angle = 180;
+	// angles_update(mlx); //to set most right angle
+	ft_putstr_fd("player angle: \n", 2);
+	ft_putnbr_fd(mlx->ply->angle, 2);
+	ft_putstr_fd("\n", 2);
+
+	ft_putstr_fd("player coord: \n", 2);
+	ft_putnbr_fd(mlx->ply->coord_x, 2);
+	ft_putstr_fd(" ", 2);
+	ft_putnbr_fd(mlx->ply->coord_y, 2);
+	ft_putstr_fd("\n", 2);
 
 	step = 0;
 	printf("Player co-ordinates: %d, %d\n\n", mlx->ply->coord_x, mlx->ply->coord_y);
+	mlx->ply->most_right_angle = mlx->ply->angle;
     while(step < SCREEN_WIDTH)
     {
 		printf("\n---step number is: %d----\n", step);
 
 		angles_correction(mlx); //in case most right is > 360
 		printf("the most right angle is: %f\n", mlx->ply->most_right_angle);
-		if (mlx->ply->most_right_angle == 0.0 || mlx->ply->most_right_angle == 360.0 || mlx->ply->most_right_angle == 90.0 || mlx->ply->most_right_angle == 180.0 || mlx->ply->most_right_angle == 270.0)
-		{
-			specific_intersections(mlx);
-		}
-		else
+		// if (mlx->ply->most_right_angle == 0.0 || mlx->ply->most_right_angle == 360.0 || mlx->ply->most_right_angle == 90.0 || mlx->ply->most_right_angle == 180.0 || mlx->ply->most_right_angle == 270.0)
+		// {
+		// 	specific_intersections(mlx);
+		// }
+		// else
 		{
 			mlx->ray->alpha = deg_to_rad(mlx->ply->most_right_angle);
 
