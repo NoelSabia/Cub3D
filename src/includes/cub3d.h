@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:07:58 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/24 16:55:05 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/09 11:50:22 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /*Defines*/
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
-# define TILE_SIZE 50
+# define TILE_SIZE 64
 # define FOV 60
 # define ROTATION_SPEED 2
 # define PLAYER_SPEED 1
@@ -72,9 +72,9 @@ typedef struct s_player
 	int		coord_y;
 	int		plyr_inside_tile_x;
 	int		plyr_inside_tile_y;
-	int		most_left_angle; //FOV
-	int		angle; //player's view central point
-	int		most_right_angle; //FOV
+	double		most_left_angle; //FOV
+	double		angle; //player's view central point
+	float		most_right_angle; //FOV
 	float	fov_radians;
 	int		rotation;
 	int		left_or_right;
@@ -90,22 +90,25 @@ typedef struct s_raytracing
 	float			da; //increase by x_axis
 	float			db; //increase by y_axis
 	float			d_h; //distance to intersection;
-	double			alpha; //angle for calculations;
-	double			alpha2; //for horiz intersections calculation;
-	int				ray_step;
+	double			alpha; //angle for calculations, in radians;
+
 	float			x1; //intersections
 	float			y1;
-	float			dist_vert_i;
-	float			vert_x_wall;
-	float			vert_y_wall;
-	float			dist_hor_i;
-	float			hor_x_wall;
-	float			hor_y_wall;
+	float			dist_vert_i; //distance to vert inter with the wall
+	float			vert_x_wall; //final untersection coordinate
+	float			vert_y_wall;//final untersection coordinate
+	float			dist_hor_i; //distance to the horizontal intersection with the wall
+	float			hor_x_wall;//final untersection coordinate
+	float			hor_y_wall;//final untersection coordinate
 	float			wall_x; //intersection with the wall
 	float			wall_y; //intersection with the wall
-	int				sq_unit; //haven't used yet;
-	double			distance_to_wall;
-	int				flag_for_wall;
+	double			distance_to_wall; //distorted distance to wall;
+
+	float			dtpp; //distance to the projection plane
+	double			abr; //angle between subsequent rays
+	float			wall_height; //computed height of the projected slice of the wal
+	int				top_wall_y; //coordinate of top wall pixel
+	int				bottom_wall_y; //coordinate of bottom wall pixel;
 }	t_raytracing;
 
 typedef struct s_mlx
@@ -131,9 +134,9 @@ void	put_block(t_mlx *mlx, int i, int j);
 void	draw_vert (t_mlx *mlx);
 void	draw_horiz (t_mlx *mlx);
 void	draw_player (t_mlx *mlx);
-void	draw_walls(t_mlx *mlx);
+void	draw_wall(t_mlx *mlx, int *step);
 void	init(t_mlx *mlx);
-float	deg_to_rad(int angle);
+double	deg_to_rad(double angle);
 void	vert_inter(t_mlx *mlx);
 void	first_inter(t_mlx *mlx);
 void	next_vert_i(t_mlx *mlx);
@@ -144,15 +147,19 @@ int		check_if_wall_v(t_mlx *mlx);
 float	ft_abs2(float a);
 void	horiz_inter(t_mlx *mlx);
 void	first_hor_inter(t_mlx *mlx);
-void	next_hor_i(t_mlx *mlx);
+
+void	corner_wall(t_mlx *mlx, int *i1, int *j1);
+//void	next_hor_i(t_mlx *mlx);
 void	specific_intersections(t_mlx *mlx);
-void	intersec_270(t_mlx *mlx);
-void	intersec_180(t_mlx *mlx);
-void	intersec_90(t_mlx *mlx);
-void	intersec_zero(t_mlx *mlx);
+// void	intersec_270(t_mlx *mlx);
+// void	intersec_180(t_mlx *mlx);
+// void	intersec_90(t_mlx *mlx);
+// void	intersec_zero(t_mlx *mlx);
 void	choose_min_dist(t_mlx *mlx);
 void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord);
-void reinit(t_mlx *mlx);
+void	reinit(t_mlx *mlx);
+void	dist_to_wall(t_mlx *mlx);
+//void	draw_the_wall(t_mlx *mlx, int i);
 
 
 /*Walls funcitons and structs*/

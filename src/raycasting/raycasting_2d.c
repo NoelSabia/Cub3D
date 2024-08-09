@@ -3,32 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_2d.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:57:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/07/24 16:57:29 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/09 11:53:22 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-float ft_abs2(float a)
-{
-	if (a < 0)
-		return (a * (-1));
-	return a;
-}
-
-float deg_to_rad(int angle)
-{
-	return angle * (M_PI / 180);
-}
-
 void draw_inter(t_mlx *mlx, float x, float y)
 {
-	printf("\n\ndraw inter\n");
-	printf("coordinates passed: %f, %f\n", x, y);
-  
+	printf("draw inter\n");
 	//to limit drawing with boundaries of the map
 	mlx_put_pixel(mlx->ray->minimap, x, y, 0x00FF00FF);
 	mlx_put_pixel(mlx->ray->minimap, x + 1, y, 0x00FF00FF);
@@ -41,18 +27,31 @@ void draw_inter(t_mlx *mlx, float x, float y)
 	mlx_put_pixel(mlx->ray->minimap, x, y - 2, 0x00FF00FF);
 }
 
-void angles_correction(t_mlx *mlx)
+double deg_to_rad(double angle)
 {
-	if (mlx->ply->angle == 0)
-	{
-		mlx->ply->most_left_angle = 30;
-		mlx->ply->most_right_angle = 330;
-	}
+	return ((angle * M_PI) / 180);
 }
+
 void angles_update (t_mlx *mlx)
 {
-	mlx->ply->most_left_angle = mlx->ply->angle + 30;
-	mlx->ply->most_right_angle = mlx->ply->angle - 30;
+	if (mlx->ply->angle == 0)
+		mlx->ply->most_right_angle = 330;
+	else
+		mlx->ply->most_right_angle = mlx->ply->angle - 30;
+}
+
+void angles_correction(t_mlx *mlx)
+{
+	if (mlx->ply->most_right_angle > 360)
+		mlx->ply->most_right_angle -= 360;
+}
+void reinit(t_mlx *mlx)
+{
+	mlx->ray->da = 0;
+	mlx->ray->db = 0;
+	mlx->ray->d_h = 0;
+	mlx->ray->x1 = mlx->ply->coord_x;
+	mlx->ray->y1 = mlx->ply->coord_y;
 }
 
 void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
@@ -105,54 +104,48 @@ void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
     }
 }
 
-void reinit(t_mlx *mlx)
+void raycasting(t_mlx *mlx)
 {
-	mlx->ray->da = 0;
-	mlx->ray->db = 0;
-	mlx->ray->d_h = 0;
-	mlx->ray->x1 = mlx->ply->coord_x;
-	mlx->ray->y1 = mlx->ply->coord_y;
+    int     step;
+	float	abr;
 
-}
-void ray_angle_correction(t_mlx *mlx)
-{
-	if (mlx->ply->most_right_angle > 360)
-		mlx->ply->most_right_angle -= 360;
-}
+    abr = ((float)FOV / SCREEN_WIDTH);
+	printf("abr is: %f\n", abr);
+	mlx->ply->angle = 90;
+	angles_update(mlx); //to set most right angle
 
-void	raycasting(t_mlx *mlx)
-{
-	// printf("\n*****this updated raycasting****\n");
-	int		i;
+	step = 0;
+	printf("Player co-ordinates: %d, %d\n\n", mlx->ply->coord_x, mlx->ply->coord_y);
+    while(step < SCREEN_WIDTH)
+    {
+		printf("\n---step number is: %d----\n", step);
 
-	// mlx->ply->angle = 90;
-	//mlx->ray->alpha = deg_to_rad(60); //DELETE
-	// angles_update(mlx); //at some point when the player changes the angle
-	// angles_correction(mlx);
-
-	i = 0;
-	while (i < 10)
-	{
-		// printf("----i is: %d-----\n", i);
-		// printf("the angle is: %d\n", mlx->ply->most_right_angle);
-		mlx->ray->alpha = deg_to_rad(mlx->ply->most_right_angle);
-		if (mlx->ply->most_right_angle == 0 || mlx->ply->most_right_angle == 360 \
-		|| mlx->ply->most_right_angle == 90 || mlx->ply->most_right_angle  == 180 \
-		|| mlx->ply->most_right_angle == 270)
+		angles_correction(mlx); //in case most right is > 360
+		printf("the most right angle is: %f\n", mlx->ply->most_right_angle);
+		if (mlx->ply->most_right_angle == 0.0 || mlx->ply->most_right_angle == 360.0 || mlx->ply->most_right_angle == 90.0 || mlx->ply->most_right_angle == 180.0 || mlx->ply->most_right_angle == 270.0)
+		{
 			specific_intersections(mlx);
+		}
 		else
 		{
-			vert_inter(mlx);
-			reinit(mlx);
+			mlx->ray->alpha = deg_to_rad(mlx->ply->most_right_angle);
+
 			horiz_inter(mlx);
+			reinit(mlx);
+
+			vert_inter(mlx);
 			choose_min_dist(mlx);
 			reinit(mlx);
 			mlx->ray->dist_vert_i = 0;
 			mlx->ray->dist_hor_i = 0;
+			//draw_inter(mlx, mlx->ray->x1, mlx->ray->y1);
+			//minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
+
 		}
-		minimap_draw_line(mlx, mlx->ray->wall_x, mlx->ray->wall_y);
-		// mlx->ply->most_right_angle += 1;
-		ray_angle_correction(mlx);
-		i++;
-	}
+		dist_to_wall(mlx);
+		draw_wall(mlx, &step);
+        mlx->ply->most_right_angle += abr;
+		printf("most right ngl after increase is: %f\n", mlx->ply->most_right_angle);
+		step++;
+    }
 }

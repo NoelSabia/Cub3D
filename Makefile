@@ -16,11 +16,12 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)raycasting/raycasting_2d.c \
 		$(SRCDIR)raycasting/minimap.c \
 		$(SRCDIR)raycasting/minimap_draw.c \
-		$(SRCDIR)raycasting/vert_inter.c \
+		$(SRCDIR)walls/floor_ceiling_color.c \
 		$(SRCDIR)raycasting/horiz_inter.c \
 		$(SRCDIR)raycasting/spec_inter.c \
+		$(SRCDIR)raycasting/vert_inter.c \
 		$(SRCDIR)raycasting/draw_ray.c \
-		$(SRCDIR)walls/floor_ceiling_color.c
+		$(SRCDIR)raycasting/wall_determ.c \
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
